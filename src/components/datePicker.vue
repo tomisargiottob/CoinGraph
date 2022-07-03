@@ -29,6 +29,9 @@
       <el-form-item>
         <el-button @click="searchDates($refs.datePickerForm)"> Buscar </el-button>
       </el-form-item>
+       <el-form-item>
+        <el-button @click="resetDates"> Reset </el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -48,20 +51,25 @@
         },
         rules: {
           from: [
-            { required: true,  message: 'Por favor ingrese fecha de busqueda', trigger: 'blur'}
+            { required: true,  message: 'Por favor ingrese fecha de busqueda' }
           ],
           to: [
-            { required: true, validator: this.controlDates, trigger: 'blur'}
+            { required: true, validator: this.controlDates }
           ]
         }
       }
     },
     methods: {
+      resetDates() {
+        const form = this.$refs.datePickerForm;
+        form.resetFields();
+        this.submitDates({})
+      },
+      submitDates(dates) {
+        this.$emit('searchDates', dates)
+      },
       searchDates(arg) {
-        const submitDates = () => {
-          this.$emit('searchDates', this.dates)
-        }
-        submitForm(arg, submitDates, 3000)
+        submitForm(arg, () => this.submitDates(this.dates), 3000)
       },
       controlDates(rule, value, callback) {
         if (!this.dates.from || !this.dates.to) {

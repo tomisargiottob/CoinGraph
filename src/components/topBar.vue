@@ -29,18 +29,18 @@
 	import { ref } from 'vue'
 
 	const activeIndex = ref('1')
+    const router = useRouter();
+    const authStore = useAuthStore();
 	const handleSelect = async (key) => {
-		if (key === '2-3') {
-			await closeSession();
+    if (key === '1') {
+       router.push({ name: 'Home' })
+    } else if (key === '2-2') {
+			router.push({ name: 'Profile' })
+		} else if (key === '2-3') {
+			await authStore.logoutUser();
+      router.push({ name: 'Login' })
 		}
 	}	
-
-	const router = useRouter();
-	const authStore = useAuthStore();
-	const closeSession = async () => {
-		await authStore.logoutUser();
-		router.push({ name: 'Login' })
-	}
 </script>
 
 <style>
