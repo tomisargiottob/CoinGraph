@@ -13,16 +13,18 @@ export const useAuthStore = defineStore("AuthStore", {
 		setAuthenticated() {
 			this.authenticated = true;
 		},
+    saveUserData(user) {
+      const userStore = useUserStore();
+      userStore.user = user;
+      sessionStorage.setItem('x-access-token', user.token );
+      sessionStorage.setItem('user', JSON.stringify(user));
+      this.authenticated = true;
+    },
 
 		async loginUser({ username, password }) {
 			try {
 				const user = await client.login(username, password);
-        const userStore = useUserStore();
-        userStore.user = user;
-				localStorage.setItem('x-access-token', user.token );
-        localStorage.setItem('user', JSON.stringify(user));
-				this.authenticated = true;
-        
+        this.saveUserData(user);
 				return user;
 			} catch (error) {
 				console.error('Login failed', error.message);
@@ -37,15 +39,14 @@ export const useAuthStore = defineStore("AuthStore", {
       } catch (err) {
         console.log('token has expired');
       }
-			localStorage.removeItem('x-access-token');
-      localStorage.removeItem('user');
+			sessionStorage.removeItem('x-access-token');
+      sessionStorage.removeItem('user');
 		},
 
-		async registerUser({username, password}) {
+		async registerUser(userData) {
 			try {
-				const user = await client.register(username, password);
-				localStorage.setItem('x-access-token', user.token );
-				this.authenticated = true;
+				const user = await client.register(userData);
+        this.saveUserData(user);
 				return user;
 			} catch (error) {
 				console.error('Login failed', error.message);

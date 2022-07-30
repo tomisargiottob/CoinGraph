@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <Pie
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :width="width"
-      :height="height"
-      :plugins="plugins"
-      />
-  </div>
+  <el-row class="scoped-graph">
+    <el-col :span="24">
+      <Pie
+        :chart-options="chartOptions"
+        :chart-data="chartData"
+        :chart-id="chartId"
+        :dataset-id-key="datasetIdKey"
+        :width="width"
+        :height="height"
+        :plugins="plugins"
+        />
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -82,3 +84,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .scoped-graph{
+    background: rgb(244, 244, 245);
+    border-radius: 20px;
+    box-shadow: rgb(218 218 222) 1px 1px 2px, rgb(255 255 255) -1px -1px 2px;
+    height:100%;
+    // padding: 10px 20px;
+  }
+</style>

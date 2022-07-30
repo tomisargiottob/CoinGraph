@@ -14,8 +14,8 @@
 	<el-menu-item index="1">Dashboard</el-menu-item>
 	<el-sub-menu index="2">
       <template #title>Perfil</template>
-      <el-menu-item index="2-1">Información</el-menu-item>
-		<el-menu-item index="2-2">Configuración</el-menu-item>
+      <!-- <el-menu-item index="2-1">Información</el-menu-item> -->
+      <el-menu-item index="2-2">Configuración</el-menu-item>
 		<hr>
       <el-menu-item index="2-3">Cerrar Sesión</el-menu-item>
     </el-sub-menu>	

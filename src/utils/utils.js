@@ -21,7 +21,7 @@ async function submitForm(formEl, callback,timeout) {
       } catch (err) {
           ElNotification({
             title: 'Error',
-            message: err.message,
+            message: err.response.data?.message,
             type: 'error',
         })
       }

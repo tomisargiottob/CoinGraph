@@ -3,35 +3,37 @@
     <el-form
       class="date-picker-form"
       ref="datePickerForm"
-      type="inline"
+      :inline="true"
       :rules="rules"
       :model="dates"
       @keyup.enter="searchDates($refs.datePickerForm)"
     >
-      <el-form-item prop="from">
-        <el-date-picker
-            class="date-picker"
-            v-model="dates.from"
-            type="date"
-            placeholder="Desde"
-            size="default"
-          />
-      </el-form-item>
-      <el-form-item prop="to">
-        <el-date-picker
-            class="date-picker"
-            v-model="dates.to"
-            type="date"
-            placeholder="Hasta"
-            size="default"
-          />
-      </el-form-item>
-      <el-form-item>
-        <el-button @click="searchDates($refs.datePickerForm)"> Buscar </el-button>
-      </el-form-item>
-       <el-form-item>
-        <el-button @click="resetDates"> Reset </el-button>
-      </el-form-item>
+      <el-row justify="center">
+          <el-form-item prop="from">
+            <el-date-picker
+                class="date-picker"
+                v-model="dates.from"
+                type="date"
+                placeholder="Desde"
+                size="default"
+              />
+          </el-form-item>   
+          <el-form-item prop="to">
+            <el-date-picker
+                class="date-picker"
+                v-model="dates.to"
+                type="date"
+                placeholder="Hasta"
+                size="default"
+              />
+          </el-form-item>
+          <el-form-item>
+            <el-button @click="searchDates($refs.datePickerForm)" type="primary" > Buscar </el-button>
+          </el-form-item>
+          <el-form-item>
+            <el-button @click="resetDates" type="danger" > Reset </el-button>
+          </el-form-item>
+      </el-row>
     </el-form>
   </div>
 </template>
@@ -88,13 +90,12 @@
   }
 </script>
 <style lang="scss">
-  .date-picker-form{
+  /*.date-picker-form{
     display: flex;
+    overflow: wrap;
     .el-input, .el-button {
       margin-top:10px;
     }
-    .el-input, .el-button, .el-form-item__error {
-      margin-left: 15px;
-    }
-  }
+    
+  }*/
 </style>

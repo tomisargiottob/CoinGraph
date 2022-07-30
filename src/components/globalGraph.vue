@@ -1,16 +1,18 @@
 <template>
-  <div class="global-graph">
-    <LineChart
-      ref="lineChart"
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :width="width"
-      :height="height"
-      @click="handleClick"
-    />
-  </div>
+  <el-row class="global-graph">
+    <el-col>
+      <LineChart
+        ref="lineChart"
+        :chart-options="chartOptions"
+        :chart-data="chartData"
+        :chart-id="chartId"
+        :dataset-id-key="datasetIdKey"
+        :width="width"
+        :height="height"
+        @click="handleClick"
+      />
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -43,11 +45,12 @@ export default {
   data() {
     return {
       height: 400,
-      width: 800,
+      width: 400,
       datasetIdKey: 'label',
       chartId: 'wallet-history',
       chartOptions: {
-        responsive: true
+        responsive: true,
+        maintainAspectRatio: false
       }
     }
   },
@@ -69,6 +72,7 @@ export default {
     chartData() {
       const defaultValue = {labels: [], datasets: [{label: 'Valor de cartera', backgroundColor: '#409eff', data: [], additional: [] }]};
       if (this.wallets.length) {
+        // const wallets = this.wallets.slice(1,5);
         return this.wallets.reduce((chartData, wallet) => {
           const registryDate = new Date(wallet.createdAt);
           chartData.labels.push(`${registryDate.getDate()}-${registryDate.getMonth()}-${registryDate.getFullYear()}`);
@@ -84,4 +88,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .global-graph{
+    height:100%;
+    place-items: center;
+    background: rgb(244, 244, 245);
+    border-radius: 20px;
+    box-shadow: rgb(218 218 222) 1px 1px 2px, rgb(255 255 255) -1px -1px 2px;
+    padding: 10px 20px;
+  }
 </style>
