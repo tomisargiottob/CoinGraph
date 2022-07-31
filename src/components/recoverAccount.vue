@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, defineEmits } from 'vue';
+import { ref, reactive } from 'vue';
 import { validateEmail, submitForm } from '../utils/utils';
 
 const emit = defineEmits(['goBack'])

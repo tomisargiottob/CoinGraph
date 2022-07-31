@@ -56,7 +56,7 @@
 <script setup>
   import { useAuthStore } from "../store/authStore";
   import { validateEmail, submitForm } from '../utils/utils';
-  import { ref, reactive, defineEmits } from 'vue'
+  import { ref, reactive } from 'vue'
 
   const emit = defineEmits(['goHome, displayLogin'])
 

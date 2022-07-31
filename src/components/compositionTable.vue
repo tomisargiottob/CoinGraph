@@ -12,7 +12,7 @@
       v-if="innerWidth>300"
       >
         <el-table-column prop="coin" label="Crypto" min-width="100"/>
-        <el-table-column sortable prop="ammount" label="Cantidad" min-width="100" />
+        <el-table-column sortable prop="amount" label="Cantidad" min-width="100" />
         <el-table-column sortable prop="value" label="Valor ($)" min-width="100"  />
         <el-table-column sortable prop="marketPrice" label="Precio de Mercado ($)" min-width="150" v-if="innerWidth>800"/>
       </el-table>
@@ -39,9 +39,9 @@ export default {
   computed: {
     walletCoins() {
       if (!this.wallet.wallet) return [];
-      return this.wallet.wallet.assets.reduce((wallet, {coin, value, ammount}) => {
+      return this.wallet.wallet.assets.reduce((wallet, {coin, value, amount}) => {
         if(value > this.minValue){
-          wallet.push({ coin , value: Math.round(value), ammount: Math.round(ammount*1000)/1000 , marketPrice: Math.floor((value/ammount) * 100) / 100 });
+          wallet.push({ coin , value: Math.round(value), amount: Math.round(amount*1000)/1000 , marketPrice: Math.floor((value/amount) * 100) / 100 });
         }
         return wallet
       },[])

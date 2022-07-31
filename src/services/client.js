@@ -47,8 +47,8 @@ class CoinMarketer {
   }
 
   async getApiKeys(userId) {
-    const { data } = await this.client.get(`/users/${userId}/apiKey`);
-    return data;
+    const { data: { apiKeys } } = await this.client.get(`/users/${userId}/apiKey`);
+    return apiKeys;
   }
   
   async addApiKey(userId, apiKey) {
