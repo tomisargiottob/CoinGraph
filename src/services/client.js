@@ -17,7 +17,7 @@ class CoinMarketer {
       if (error.response.status === 401) {
         router.push('/login')
       }
-      throw new Error(error.response.data.message);
+      throw new Error(error);
     });
 	}
 
@@ -52,15 +52,69 @@ class CoinMarketer {
   }
   
   async addApiKey(userId, apiKey) {
-    const { data } = await this.client.post(`/users/${userId}/apiKey`, apiKey);
-    console.log(data);
-    return data;
+    try {
+      const { data } = await this.client.post(`/users/${userId}/apiKey`, apiKey);
+      console.log(data);
+      return data;
+    } catch (err) {
+      console.log(JSON.stringify(err));
+    }
   }
 
   async removeApiKey(userId, apiKey) {
     const { data } = await this.client.delete(`/users/${userId}/apiKey/${apiKey}`);
     return data;
   }
+
+  async enableApiKey(userId, apiKey) {
+    const { data } = await this.client.post(`/users/${userId}/apiKey/${apiKey}/enable`);
+    return data;
+  }
+
+  async disableApiKey(userId, apiKey) {
+    const { data } = await this.client.post(`/users/${userId}/apiKey/${apiKey}/disable`);
+    return data;
+  }
+
+  async getStaticCryptos(userId) {
+    const { data: { staticCryptos } } = await this.client.get(`/users/${userId}/staticCrypto`);
+    return staticCryptos;
+  }
+
+  async addStaticCrypto(userId, crypto) {
+    const cryptoData = {
+      asset: crypto.asset,
+      amount: +crypto.amount,
+      averagePrice: +crypto.averagePrice,
+    }
+    const { data } = await this.client.post(`/users/${userId}/staticCrypto`, cryptoData);
+    return data;
+  }
+
+  async removeStaticCrypto(userId, cryptoId) {
+    const { data } = await this.client.delete(`/users/${userId}/staticCrypto/${cryptoId}`);
+    return data;
+  }
+
+  async editStaticCrypto(userId, crypto) {
+    const cryptoData = {
+      amount: +crypto.amount,
+      averagePrice: +crypto.averagePrice,
+    }
+    const { data } = await this.client.patch(`/users/${userId}/staticCrypto/${crypto.id}`, cryptoData);
+    return data;
+  }
+
+  async getAvailableCryptos(query) {
+    let formatedQuery;
+    if (query) {
+      formatedQuery = `?where[asset]=${query}`
+    }
+    const { data: { availableCryptos } } = await this.client.get(`/availableCryptos${formatedQuery}`);
+    console.log(query, availableCryptos);
+    return availableCryptos;
+  }
+
 }
 
 export default new CoinMarketer();
