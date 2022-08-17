@@ -21,6 +21,7 @@
 </template>
 
 <script>
+  import { ElMessage } from 'element-plus'
   import DatePicker from '../components/datePicker.vue';
   import ScopedGraph from '../components/scopedGraph.vue';
   import GlobalGraph from '../components/globalGraph.vue';
@@ -49,9 +50,17 @@
         const walletStore = useWalletStore();
         walletStore.getWallets(dates.from, dates.to);
       },
-      chooseWallet(id) {
-        const walletStore = useWalletStore();
-        walletStore.showWallet(id);
+      chooseWallet(account) {
+        console.log(account);
+        if (account) {
+          const walletStore = useWalletStore();
+          walletStore.showAccount(account.id, account.type);
+        } else {
+          ElMessage({
+            message: 'No se ha recopilado informacion de la cartera en dicha fecha',
+            type: 'warning',
+          })
+        }
       }
     },
 }

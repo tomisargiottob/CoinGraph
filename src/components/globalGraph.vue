@@ -70,18 +70,53 @@ export default {
   },
   computed: {
     chartData() {
-      const defaultValue = {labels: [], datasets: [{label: 'Valor de cartera', backgroundColor: '#409eff', data: [], additional: [] }]};
+      const defaultDataSet = {label: '', backgroundColor: '#409eff', data: [], additional: [] }
+      const chartData = {labels: [], datasets: []};
+      const globalPosition = { value: [], additional: []};
       if (this.wallets.length) {
-        // const wallets = this.wallets.slice(1,5);
-        return this.wallets.reduce((chartData, wallet) => {
+        const extraData = {};
+        const accountNames = {};
+        const accountsHistory = this.wallets.reduce((accountHistory, wallet) => {
+          let value = 0;
+          for (const account of wallet.accounts) {
+            if (!accountHistory[account.apiKeyId]) {
+              accountHistory[account.apiKeyId] = Array(chartData.labels.length).fill(0);
+              extraData[account.apiKeyId] = Array(chartData.labels.length).fill(0);
+              accountNames[account.apiKeyId] = account.account
+            }
+            extraData[account.apiKeyId].push({ id: wallet._id, type: account.account });
+            accountHistory[account.apiKeyId].push(account.value)
+            value += account.value; 
+          }
+          Object.keys(accountHistory).forEach((accountName) => {
+            if (accountHistory[accountName].length <= chartData.labels.length) {
+              accountHistory[accountName].push(0);
+              extraData[accountName].push(0);
+            }
+          })
+          globalPosition.additional.push({ id: wallet._id, type: 'global' });
+          globalPosition.value.push(value);
           const registryDate = new Date(wallet.createdAt);
           chartData.labels.push(`${registryDate.getDate()}-${registryDate.getMonth()}-${registryDate.getFullYear()}`);
-          chartData.datasets[0].data.push(wallet.wallet.value);
-          chartData.datasets[0].additional.push(wallet._id);
-          return chartData;
-        }, defaultValue)
+          return accountHistory;
+        }, {});
+        for (const [id, accountHistory] of Object.entries(accountsHistory)) {
+          const filledDataSet = { ...defaultDataSet }
+          filledDataSet.additional = extraData[id];
+          filledDataSet.data = accountHistory;
+          filledDataSet.backgroundColor = `hsl(${Math.floor(Math.random() * 10) * 137.508 },50%,75%)`,
+          filledDataSet.label = `Valor de cartera ${accountNames[id]}`
+          chartData.datasets.push(filledDataSet);
+        }
+        if(Object.keys(accountsHistory).length > 1) {
+          const filledGlobalDataSet = defaultDataSet;
+          filledGlobalDataSet.data = globalPosition.value;
+          filledGlobalDataSet.additional = globalPosition.additional;
+          filledGlobalDataSet.label = `Valor de cartera global`
+          chartData.datasets.push(filledGlobalDataSet);
+        }
       }
-      return defaultValue;
+      return chartData;
     }
   }
 }

@@ -39,6 +39,7 @@
     setup() {
       const userStore = useUserStore();
       userStore.getApiKeys();
+      userStore.getStaticCryptos();
     },
     data() {
       return {

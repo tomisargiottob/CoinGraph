@@ -30,29 +30,63 @@ export const useWalletStore = defineStore("WalletStore", {
         const authStore = useAuthStore();
         authStore.logoutUser();
       }
-      if (this.wallets.length) {
-        this.currentWallet = this.wallets[this.wallets.length -1]
-      }
       if(!this.lastWallet.createdAt || this.lastWallet.createdAt < this.wallets[this.wallets.length -1 ].createdAt ) {
         this.lastWallet = this.wallets[this.wallets.length -1 ]
-        this.lastWallet.amount = this.lastWallet.wallet.assets.reduce((cryptos, asset) => {
-          if (asset.value > ( userStore.user.minValue || 10) ) {
-            cryptos += 1;
-          }
-          if (!this.lastWallet.cryptoWeight || this.lastWallet.cryptoWeight < asset.value) {
-            this.lastWallet.cryptoWeight = asset.coin;
-          }
-          return cryptos;
-        }, 0);
+        this.calculateWalletGlobals(this.lastWallet);
+      }
+      if (this.wallets.length) {
+        this.currentWallet = this.wallets[this.wallets.length -1];
+        this.calculateWalletGlobals(this.currentWallet);
+        this.currentWallet.currentFocus = this.currentWallet.globalPosition;
+        this.currentWallet.currentFocus.value = this.currentWallet.totalValue;
       }
     },
-    showWallet(id) {
-      this.currentWallet = this.wallets.find((wallet) => wallet._id === id);
+    calculateWalletGlobals(wallet) {
+      const acumulatedCryptos = {};
+      if(!wallet.globalPosition) {
+        for (const account of wallet.accounts) {
+          for (const crypto of account.assets) {
+            if(!acumulatedCryptos[crypto.coin]) {
+              acumulatedCryptos[crypto.coin] = { ...crypto };
+            } else {
+              acumulatedCryptos[crypto.coin].amount += +crypto.amount;
+              acumulatedCryptos[crypto.coin].value += +crypto.value;
+            }
+          }
+        }
+        console.log(acumulatedCryptos);
+        wallet.globalPosition = {};
+        wallet.globalPosition.assets = Object.keys(acumulatedCryptos).reduce((fileredCryptos, crypto) => {
+          const cryptoValue = acumulatedCryptos[crypto].amount * acumulatedCryptos[crypto].value;
+          if (cryptoValue > 10) {
+            fileredCryptos.push(acumulatedCryptos[crypto]);
+          }
+          if(cryptoValue > (wallet.cryptoWeight || 0)) {
+            wallet.cryptoWeight = acumulatedCryptos[crypto].coin;
+          }
+          return fileredCryptos;
+        }, [])
+      }
+    },
+    showAccount(id, type) {
+      if (id && type) {
+        this.currentWallet = this.wallets.find((wallet) => wallet._id === id);
+        if (!this.currentWallet.globalPosition) {
+          this.calculateWalletGlobals(this.currentWallet);
+        }
+        if (type === 'global') {
+          this.currentWallet.currentFocus = this.currentWallet.globalPosition;
+          console.log(this.currentWallet.currentFocus);
+        } else {
+          this.currentWallet.currentFocus = this.currentWallet.accounts.find((walletAccount) => walletAccount.account === type);
+          console.log(this.currentWallet.currentFocus);
+        }
+      }
     }
 	},
   getters: {
-    walletValue: (state) => Math.round(state.lastWallet.wallet.value),
-    cryptoAmount: (state) => state.lastWallet.amount,
+    walletValue: (state) => Math.round(state.lastWallet.totalValue),
+    cryptoAmount: (state) => state.lastWallet.globalPosition.assets.length,
     cryptoWeight: (state) => state.lastWallet.cryptoWeight,
   },
 })

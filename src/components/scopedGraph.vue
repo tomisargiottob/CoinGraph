@@ -28,9 +28,13 @@ import {
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
-function selectColor(number) {
-  const hue = number * 137.508; // use golden angle approximation
-  return `hsl(${hue},50%,75%)`;
+function selectColor(asset) {
+  let color = localStorage.getItem(asset);
+  if (!color) {
+    color = `hsl(${Math.floor(Math.random() * 10) * 137.508 },50%,75%)`; // use golden angle approximation
+    localStorage.setItem(asset, color);
+  }
+  return color;
 }
 
 export default {
@@ -65,16 +69,16 @@ export default {
   },
   computed: {
     walletValue() {
-      return Math.round(this.currentWallet && this.currentWallet.wallet && this.currentWallet.wallet.value)
+      return Math.round(this.currentWallet && this.currentWallet.currentFocus && this.currentWallet.currentFocus.value)
     },
     chartData() {
       const defaultValue = {labels: [], datasets: [{backgroundColor: [], data: []}]};
-      if(this.currentWallet?.wallet) {
-        return this.currentWallet.wallet.assets.reduce((wallet, asset) => {
+      if(this.currentWallet.currentFocus) {
+        return this.currentWallet.currentFocus.assets.reduce((wallet, asset) => {
           if (parseInt(asset.value) > this.minValue){
             wallet.labels.push(asset.coin);
             wallet.datasets[0].data.push(Math.round(asset.value));
-            wallet.datasets[0].backgroundColor.push(selectColor(Math.floor(Math.random() * 10)));
+            wallet.datasets[0].backgroundColor.push(selectColor(asset.coin));
           }
           return wallet
         }, defaultValue);

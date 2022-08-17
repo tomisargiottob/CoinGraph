@@ -38,8 +38,8 @@ export default {
   },
   computed: {
     walletCoins() {
-      if (!this.wallet.wallet) return [];
-      return this.wallet.wallet.assets.reduce((wallet, {coin, value, amount}) => {
+      if (!this.wallet.currentFocus) return [];
+      return this.wallet.currentFocus.assets.reduce((wallet, {coin, value, amount}) => {
         if(value > this.minValue){
           wallet.push({ coin , value: Math.round(value), amount: Math.round(amount*1000)/1000 , marketPrice: Math.floor((value/amount) * 100) / 100 });
         }
