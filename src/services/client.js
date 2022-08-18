@@ -52,13 +52,8 @@ class CoinMarketer {
   }
   
   async addApiKey(userId, apiKey) {
-    try {
-      const { data } = await this.client.post(`/users/${userId}/apiKey`, apiKey);
-      console.log(data);
-      return data;
-    } catch (err) {
-      console.log(JSON.stringify(err));
-    }
+    const { data } = await this.client.post(`/users/${userId}/apiKey`, apiKey);
+    return data;
   }
 
   async removeApiKey(userId, apiKey) {
@@ -111,7 +106,6 @@ class CoinMarketer {
       formatedQuery = `?where[asset]=${query}`
     }
     const { data: { availableCryptos } } = await this.client.get(`/availableCryptos${formatedQuery}`);
-    console.log(query, availableCryptos);
     return availableCryptos;
   }
 

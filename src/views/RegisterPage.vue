@@ -115,7 +115,11 @@
           })
         }
       } else {
-        console.log('error submit!', fields)
+        ElNotification({
+            title: 'Error',
+            message: fields,
+            type: 'error',
+          })
       }
     })
   }

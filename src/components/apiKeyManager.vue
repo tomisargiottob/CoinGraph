@@ -116,7 +116,6 @@
             type: 'success',
           })
         } catch (err) {
-          console.log(err);
           ElMessage.error(err.message);
         }
         this.form = {

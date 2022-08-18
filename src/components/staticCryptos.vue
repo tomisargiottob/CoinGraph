@@ -120,7 +120,6 @@ export default {
     },
     showDialogForm(idx) {
       if (idx !== undefined) {
-        console.log('entra aqui', this.staticCryptos[idx])
         this.form = this.staticCryptos[idx];
         this.form.title = 'Editar Crypto'
         this.form.edit = true

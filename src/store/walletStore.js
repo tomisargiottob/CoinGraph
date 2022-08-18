@@ -75,10 +75,8 @@ export const useWalletStore = defineStore("WalletStore", {
         }
         if (type === 'global') {
           this.currentWallet.currentFocus = this.currentWallet.globalPosition;
-          console.log(this.currentWallet.currentFocus);
         } else {
           this.currentWallet.currentFocus = this.currentWallet.accounts.find((walletAccount) => walletAccount.account === type);
-          console.log(this.currentWallet.currentFocus);
         }
       }
     }

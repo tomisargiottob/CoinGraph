@@ -75,7 +75,6 @@
         walletStore.getWallets(dates.from, dates.to);
       },
       chooseWallet(account) {
-        console.log(account);
         if (account) {
           const walletStore = useWalletStore();
           walletStore.showAccount(account.id, account.type);
