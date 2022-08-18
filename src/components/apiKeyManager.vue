@@ -11,10 +11,10 @@
     <el-row justify="center" class="key-manager">
       <el-col :span="16">
         <el-table :data="apiKeys">
-          <el-table-column fixed prop="name" label="Nombre identificador" width="250" />
-          <el-table-column fixed prop="account" label="Cuenta Asociada" width="150" />
-          <el-table-column fixed prop="status" label="Estado" width="150" />
-          <el-table-column fixed="right" label="Operaciones" width="250">
+          <el-table-column prop="name" label="Nombre identificador" width="250" />
+          <el-table-column prop="account" label="Cuenta Asociada" width="150" />
+          <el-table-column prop="status" label="Estado" width="150" />
+          <el-table-column label="Operaciones" width="250">
             <template #default="scope">
               <el-row >
                 <el-col :span="12">

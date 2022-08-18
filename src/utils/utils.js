@@ -26,7 +26,6 @@ async function submitForm(formEl, callback,timeout) {
         })
       }
 		} else {
-			console.log('error submit!', fields);
       if(timeout) {
         setTimeout(()=> {
           formEl.clearValidate();

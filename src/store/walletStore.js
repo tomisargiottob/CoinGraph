@@ -30,11 +30,11 @@ export const useWalletStore = defineStore("WalletStore", {
         const authStore = useAuthStore();
         authStore.logoutUser();
       }
-      if(!this.lastWallet.createdAt || this.lastWallet.createdAt < this.wallets[this.wallets.length -1 ].createdAt ) {
-        this.lastWallet = this.wallets[this.wallets.length -1 ]
-        this.calculateWalletGlobals(this.lastWallet);
-      }
       if (this.wallets.length) {
+        if(!this.lastWallet.createdAt || this.lastWallet.createdAt < this.wallets[this.wallets.length -1 ].createdAt ) {
+          this.lastWallet = this.wallets[this.wallets.length -1 ]
+          this.calculateWalletGlobals(this.lastWallet);
+        }
         this.currentWallet = this.wallets[this.wallets.length -1];
         this.calculateWalletGlobals(this.currentWallet);
         this.currentWallet.currentFocus = this.currentWallet.globalPosition;
@@ -43,7 +43,7 @@ export const useWalletStore = defineStore("WalletStore", {
     },
     calculateWalletGlobals(wallet) {
       const acumulatedCryptos = {};
-      if(!wallet.globalPosition) {
+      if(wallet && !wallet.globalPosition) {
         for (const account of wallet.accounts) {
           for (const crypto of account.assets) {
             if(!acumulatedCryptos[crypto.coin]) {
@@ -54,7 +54,6 @@ export const useWalletStore = defineStore("WalletStore", {
             }
           }
         }
-        console.log(acumulatedCryptos);
         wallet.globalPosition = {};
         wallet.globalPosition.assets = Object.keys(acumulatedCryptos).reduce((fileredCryptos, crypto) => {
           const cryptoValue = acumulatedCryptos[crypto].amount * acumulatedCryptos[crypto].value;
@@ -85,8 +84,8 @@ export const useWalletStore = defineStore("WalletStore", {
     }
 	},
   getters: {
-    walletValue: (state) => Math.round(state.lastWallet.totalValue),
-    cryptoAmount: (state) => state.lastWallet.globalPosition.assets.length,
-    cryptoWeight: (state) => state.lastWallet.cryptoWeight,
+    walletValue: (state) => Math.round(state.lastWallet?.totalValue) || 0,
+    cryptoAmount: (state) => state.lastWallet?.globalPosition?.assets?.length || 0,
+    cryptoWeight: (state) => state.lastWallet?.cryptoWeight || '-',
   },
 })

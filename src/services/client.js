@@ -17,7 +17,7 @@ class CoinMarketer {
       if (error.response.status === 401) {
         router.push('/login')
       }
-      throw new Error(error);
+      throw error;
     });
 	}
 
