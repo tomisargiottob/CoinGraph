@@ -65,9 +65,9 @@
   .user-management-items {
     height:100%;
     place-items: center;
-    background: rgb(244, 244, 245);
+    background: $graphElements;
     border-radius: 20px;
-    box-shadow: rgb(218 218 222) 1px 1px 2px, rgb(255 255 255) -1px -1px 2px;
+    box-shadow: $graphShadow 5px 5px 15px;
     padding: 10px 20px;
   }
   .el-collapse-item__header{
