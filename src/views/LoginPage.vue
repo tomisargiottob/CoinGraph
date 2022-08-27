@@ -1,12 +1,12 @@
 <template>
     <div class="login-form">
         <div id="login-panel">
-            <el-image src="./coinGraphMin.png"/>
-            <login-form v-if="login" @goHome="redirectHome" @displayRecoverForm="displayForm('forgotPassword')"></login-form>
-            <recover-account v-if="forgotPassword" @goBack="displayForm('login')"></recover-account>
-            <register-form v-if="register" @displayLogin="displayForm('login')" @goHome="redirectHome"></register-form>
-            <hr v-if="!register">	
-            <div class="register" v-if="!register">
+          <h1>{{ saludo }}</h1>
+            <login-form v-if="form === 'login'" @goHome="redirectHome" @displayRecoverForm="displayForm('forgotPassword')"></login-form>
+            <recover-account v-if="form === 'forgotPassword'" @goBack="displayForm('login')"></recover-account>
+            <register-form v-if="form === 'register'" @displayLogin="displayForm('login')" @goHome="redirectHome"></register-form>
+            <hr v-if="form !== 'register'">	
+            <div class="register" v-if="form !== 'register'">
                 <p>¿No tienes cuenta?</p>
                 <span class="action-text" @click="displayForm('register')">Regístrate</span>
             </div>
@@ -29,8 +29,18 @@ const authStore = useAuthStore();
 const redirectHome = () => {
   router.push({ name: 'Home' });
 }
-if (router.meta && router.meta.show) {
-  displayForm('register');
+const saludo = ref('Iniciar sesión')
+const form = ref('login')
+
+const displayForm = (selectedForm) => {
+  form.value = selectedForm;
+  if (selectedForm === 'login') {
+    saludo.value = 'Iniciar sesión';
+  } else if (selectedForm === 'forgotPassword') {
+    saludo.value = 'Recuperar contraseña';
+  } else {
+    saludo.value = 'Registrarse'
+  }
 }
 const token = sessionStorage.getItem('x-access-token');
 if (token) {
@@ -38,25 +48,17 @@ if (token) {
   redirectHome();
 }
 
-const login = ref(true);
-const forgotPassword = ref(false);
-const register = ref(false);
-
-const displayForm = (form) => {
-  forgotPassword.value = 'forgotPassword' === form ? true : false
-  login.value = 'login' === form ? true : false
-  register.value = 'register' === form ? true : false
+if (router.currentRoute.value?.meta?.show === 'register') {
+  displayForm('register');
 }
+
 
 </script>
 <style>
   .login-form{
-      background-image: url("../assets/login-bg.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
       min-height: 90vh;
       width: 100%;
-      padding: 100px 40px;
+      padding: 70px 0%;
   }
 
   #login-panel {
@@ -69,6 +71,7 @@ const displayForm = (form) => {
       min-height: 40vh;
       margin: 0 auto;
       margin-top: 50px;
+      box-shadow: 5px 5px 10px 10px gray;
   }
 
   .login-form h2{
