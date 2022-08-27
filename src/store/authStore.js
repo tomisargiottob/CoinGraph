@@ -8,6 +8,9 @@ export const useAuthStore = defineStore("AuthStore", {
 			authenticated: false,
 		}
 	},
+  getters: {
+    authorized: (state) => state.authenticated,
+  },
 	actions: {
 
 		setAuthenticated() {
