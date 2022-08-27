@@ -1,7 +1,8 @@
 <template>
-  <el-row class="scoped-graph">
+  <el-row class="pie-graph">
     <el-col :span="24">
       <Pie
+        class="graph"
         :chart-options="chartOptions"
         :chart-data="chartData"
         :chart-id="chartId"
@@ -45,13 +46,12 @@ export default {
   components: { Pie },
   data() {
     return {
-      height: 400,
-      width: 400,
+      height: 300,
+      width: 300,
       datasetIdKey: 'label',
       chartId: 'wallet-history',
       plugins: [ChartDataLabels],
       chartOptions: {
-        responsive: true,
         plugins: {
           legend: {
             display: true,
@@ -89,12 +89,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  .scoped-graph{
-    background: rgb(244, 244, 245);
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  .pie-graph{
+    place-items: center;
+    background: $graphElements;
+    max-height: 480px;
     border-radius: 20px;
-    box-shadow: rgb(218 218 222) 1px 1px 2px, rgb(255 255 255) -1px -1px 2px;
-    height:100%;
-    // padding: 10px 20px;
+    box-shadow: $graphShadow 5px 5px 15px;
+    #wallet-history{
+      max-height: 480px;
+    }
   }
 </style>

@@ -1,23 +1,45 @@
 <template>
-  <el-row class="global-graph">
-    <el-col>
-      <LineChart
-        ref="lineChart"
-        :chart-options="chartOptions"
-        :chart-data="chartData"
-        :chart-id="chartId"
-        :dataset-id-key="datasetIdKey"
-        :width="width"
-        :height="height"
-        @click="handleClick"
-      />
-    </el-col>
-  </el-row>
+  <div class="global-graph">
+    <el-row>
+      <el-col :xs="24" :span="5">
+        <el-row>
+          <span>
+            Valor cartera:
+          </span>
+        </el-row>
+        <div class="wallet-value">
+          <h1>
+            {{formatedValue}} $ 
+          </h1>
+          <p v-if="variationPercentage < 0" class="negative-percentage">{{variationPercentage}} %</p>
+          <p v-if="variationPercentage >= 0" class="positive-percentage">{{variationPercentage}} %</p>
+        </div>
+      </el-col>
+      <el-col :xs="24" :span="19" class="date-picker">
+        <date-picker @searchDates="search" @resetDates="search({})"></date-picker> 
+      </el-col>
+    </el-row>
+    <el-row >
+      <el-col>
+        <LineChart
+          ref="lineChart"
+          :chart-options="chartOptions"
+          :chart-data="chartData"
+          :chart-id="chartId"
+          :dataset-id-key="datasetIdKey"
+          :width="width"
+          :height="height"
+          @click="handleClick"
+        />
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
-
+import { useWalletStore } from '../store/walletStore';
 import { Line as LineChart } from 'vue-chartjs'
+import DatePicker from './datePicker.vue';
 import {
   Chart as ChartJS,
   Title,
@@ -40,8 +62,8 @@ ChartJS.register(Title,
 
 export default {
   name: 'BarChart',
-  components: { LineChart },
-  props: ['wallets'],
+  components: { LineChart, DatePicker },
+  props: ['wallets', 'currentWallet'],
   data() {
     return {
       height: 400,
@@ -55,6 +77,10 @@ export default {
     }
   },
   methods: {
+    search(dates) {
+      const walletStore = useWalletStore();
+      walletStore.getWallets(dates.from, dates.to);
+    },
     handleClick(event) {
       const graph = this.$refs.lineChart.chart;
       const points = graph.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
@@ -69,6 +95,20 @@ export default {
     }
   },
   computed: {
+    formatedValue() {
+      let dollarUSLocale = Intl.NumberFormat('en-US');
+      return dollarUSLocale.format(Math.round(this.currentWallet.totalValue))
+    },
+    variationPercentage() {
+      if(this.wallets) {
+        const position = this.wallets.findIndex((wallet) => wallet._id === this.currentWallet._id);
+        if(position <= 0 ){
+          return 'N/A'
+        }
+        return Math.round(((this.currentWallet.totalValue - this.wallets[position - 1].totalValue) / this.currentWallet.totalValue )* 10000)/100
+      } 
+      return 0;
+    },
     chartData() {
       const defaultDataSet = {label: '', backgroundColor: '#409eff', data: [], additional: [] }
       const chartData = {labels: [], datasets: []};
@@ -123,12 +163,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../styles/variables.scss';
+
   .global-graph{
+    .wallet-value {
+      position: relative;
+      margin-top: 20px;
+      h1{
+        margin: 0px;
+        padding-right: 40%;
+      }
+      p {
+        margin: 0px;
+        max-height: 20px;
+        border-radius: 5px;
+        padding: 2px;
+        position: absolute;
+        top: 0px;
+        right: 10%;
+      }
+      .negative-percentage{
+        color: rgb(192, 3, 3);
+        background-color: rgba(255, 0, 0, 0.253);
+      }
+      .positive-percentage{
+        color: rgb(31, 173, 2);
+        background-color: rgba(33, 255, 13, 0.253);
+      }
+
+    }
+    .date-picker{
+      padding-top: 30px;
+    }
     height:100%;
     place-items: center;
-    background: rgb(244, 244, 245);
+    background:$graphElements;
     border-radius: 20px;
-    box-shadow: rgb(218 218 222) 1px 1px 2px, rgb(255 255 255) -1px -1px 2px;
+    box-shadow: $graphShadow 5px 5px 15px;
     padding: 10px 20px;
   }
 </style>
