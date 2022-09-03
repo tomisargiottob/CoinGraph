@@ -16,6 +16,15 @@ export const useAuthStore = defineStore("AuthStore", {
 		setAuthenticated() {
 			this.authenticated = true;
 		},
+    recoverUserData() {
+      const token = sessionStorage.getItem('x-access-token');
+      const user = sessionStorage.getItem('user');
+      if (token && user ) {
+        const userStore = useUserStore();
+        userStore.user = JSON.parse(user);
+        this.authenticated = true
+      }
+    },
     saveUserData(user) {
       const userStore = useUserStore();
       userStore.user = user;
@@ -26,7 +35,7 @@ export const useAuthStore = defineStore("AuthStore", {
 
 		async loginUser({ username, password }) {
 			try {
-				const user = await client.login(username, password);
+				const user = await client.login(username.toLowerCase(), password);
         this.saveUserData(user);
 				return user;
 			} catch (error) {
@@ -48,6 +57,7 @@ export const useAuthStore = defineStore("AuthStore", {
 
 		async registerUser(userData) {
 			try {
+        userData.username = userData.username.toLowerCase()
 				const user = await client.register(userData);
         this.saveUserData(user);
 				return user;
