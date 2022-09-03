@@ -1,21 +1,25 @@
 <template>
   <div class="global-graph">
     <el-row>
-      <el-col :xs="24" :span="5">
+      <el-col :xs="24" :sm="10" :md="9" :l="7" :xl="5">
         <el-row>
-          <span>
-            Valor cartera:
+          <span class="value-title">
+            Total cartera:
           </span>
         </el-row>
-        <div class="wallet-value">
-          <h1>
-            {{formatedValue}} $ 
-          </h1>
-          <p v-if="variationPercentage < 0" class="negative-percentage">{{variationPercentage}} %</p>
-          <p v-if="variationPercentage >= 0" class="positive-percentage">{{variationPercentage}} %</p>
-        </div>
+        <el-row class="wallet-value" justify="end">
+          <el-col :xs="8" :sm="8" :md="6" :lg="6" :xl="6">
+            <p v-if="variationPercentage < 0" class="negative-percentage">{{variationPercentage}} %</p>
+            <p v-if="variationPercentage >= 0" class="positive-percentage">{{variationPercentage}} %</p>
+          </el-col>
+          <el-col :xs="24" :sm="24" :md="19" :lg="19" :xl="19">
+            <h1>
+              {{formatedValue}} $ 
+            </h1>
+          </el-col>
+        </el-row>
       </el-col>
-      <el-col :xs="24" :span="19" class="date-picker">
+      <el-col :xs="24" :sm="14" :md="15" :l="17" :xl="19" class="date-picker">
         <date-picker @searchDates="search" @resetDates="search({})"></date-picker> 
       </el-col>
     </el-row>
@@ -166,21 +170,21 @@ export default {
   @import '../styles/variables.scss';
 
   .global-graph{
+    .value-title{
+      text-decoration: underline;
+      font-weight: 600;
+      font-size: 20px;
+    }
     .wallet-value {
       position: relative;
-      margin-top: 20px;
       h1{
         margin: 0px;
-        padding-right: 40%;
       }
       p {
         margin: 0px;
-        max-height: 20px;
         border-radius: 5px;
-        padding: 2px;
-        position: absolute;
-        top: 0px;
-        right: 10%;
+        padding: 3px;
+        width: fit-content;
       }
       .negative-percentage{
         color: rgb(192, 3, 3);
