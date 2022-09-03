@@ -25,11 +25,15 @@ export const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 	const publicPages = ['/login', '/register'];
+  const authData = useAuthStore();
   if(to.path === '/') {
+    authData.recoverUserData();
+    if (authData.authenticated && !to.params.user) {
+      return next('/dashboard');
+    }
     return next();
   }
 	const authRequired = !publicPages.includes(to.path);
-	const authData = useAuthStore();
 	if (authRequired && !authData.authenticated) {
 		return next('/login');
 	}

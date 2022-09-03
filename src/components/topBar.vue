@@ -50,8 +50,8 @@
 	const activeIndex = ref('1')
   const router = useRouter();
   const authStore = useAuthStore();
-  const redirectTo = (page) => {
-    router.push({ name: page });
+  const redirectTo = (page, meta) => {
+    router.push({ name: page , params: meta });
   }
   const currentRoute = ref(false);
   watch(router.currentRoute,(value) => {
@@ -59,7 +59,7 @@
   });
 	const handleSelect = async (key) => {
     if (key === '0') {
-      redirectTo('Landing');
+      redirectTo('Landing', { user: true });
     } else if (key === '1') {
       redirectTo('Home');
     } else if (key === '2-2') {
