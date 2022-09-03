@@ -8,7 +8,8 @@ export const useWalletStore = defineStore("WalletStore", {
 		return {
 			wallets: [],
       currentWallet: {},
-      lastWallet: {}
+      lastWallet: {},
+      loadingWallets: true,
 		}
 	},
 	actions: {
@@ -40,6 +41,7 @@ export const useWalletStore = defineStore("WalletStore", {
         this.currentWallet.currentFocus = this.currentWallet.globalPosition;
         this.currentWallet.currentFocus.value = this.currentWallet.totalValue;
       }
+      this.loadingWallets = false;
     },
     calculateWalletGlobals(wallet) {
       const acumulatedCryptos = {};

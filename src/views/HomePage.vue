@@ -1,48 +1,50 @@
 <template>
-  <div>
-    <h1 class="main-title">Dashboard</h1>
-    <el-row v-if="!wallets.length" justify="center" class="home-view">
-      <el-col class="icon-place" :span="24">
-        <RouterLink to="/profile">
-          <el-icon><CirclePlus /></el-icon>
-        </RouterLink>
-      </el-col>
-      <el-col class="warning-place" :span="12">      
-        <h2>
-          No se han encontrado registros del usuario, por favor asegurate de haber conectado las cuentas a seguir o agregar manualmente tus cryptos
-        </h2>
-        <RouterLink to="/profile">
-          <span class="link-button">
-            Perfil
-          </span>
-        </RouterLink>
-      </el-col>
-      <el-row>
-        <span class="space-corrector">
-        </span>  
-      </el-row>
-    </el-row>
-    <el-row v-if="wallets.length" class="home-view">
-      <el-row class="statistics-section" justify="center">
-        <el-col class="filter-form" :xs="{span: 24, offset: 0}" :sm="{span: 18, offset: 0}" :md="{span: 18, offset: 0}" :lg="{span: 16, offset: 0}" :xl="{span: 16, offset: 0}">
-          <user-statistics></user-statistics>
+  <el-row v-loading="loadingWallets" element-loading-text="Loading..." element-loading-background="rgba(256, 256, 256, 1)" justify="center">
+    <el-col :span="24">
+      <h1 class="main-title">Dashboard</h1>
+      <el-row v-if="!wallets.length" justify="center" class="home-view">
+        <el-col class="icon-place" :span="24">
+          <RouterLink to="/profile">
+            <el-icon><CirclePlus /></el-icon>
+          </RouterLink>
         </el-col>
-      </el-row>
-      <el-row class="graph-section" justify="center">
-        <el-col class="main-graph" :xs="{span: 24, offset: 0}" :sm="{span: 18, offset: 0}" :md="{span: 18, offset: 0}" :lg="{span: 16, offset: 0}" :xl="{span: 16, offset: 0}">
-          <global-graph :wallets="wallets" :currentWallet="currentWallet" @showWallet="chooseWallet"></global-graph>
+        <el-col class="warning-place" :span="12">      
+          <h2>
+            No se han encontrado registros del usuario, por favor asegurate de haber conectado las cuentas a seguir o agregar manualmente tus cryptos
+          </h2>
+          <RouterLink to="/profile">
+            <span class="link-button">
+              Perfil
+            </span>
+          </RouterLink>
         </el-col>
+        <el-row>
+          <span class="space-corrector">
+          </span>  
+        </el-row>
       </el-row>
-      <el-row class="secondary-section" justify="center">
-        <el-col class="scoped-graph" :xs="{span: 24, offset: 0}" :sm="{span: 10, offset: 0}" :md="{span: 10, offset: 0}" :lg="{span: 8, offset: 0}" :xl="{span: 8, offset: 0}">
-          <scoped-graph :currentWallet="currentWallet" :minValue="10"></scoped-graph>
-        </el-col>
-        <el-col class="composition-table" :xs="{span: 24, offset: 0}" :sm="{span: 18, offset: 0}" :md="{span: 18, offset: 0}" :lg="{span: 16, offset: 0}" :xl="{span: 16, offset: 0}">
-          <composition-table :wallet="currentWallet" :minValue="10"></composition-table>
-        </el-col>
+      <el-row v-if="wallets.length" class="home-view">
+        <el-row class="statistics-section" justify="center">
+          <el-col class="filter-form" :xs="{span: 24, offset: 0}" :sm="{span: 18, offset: 0}" :md="{span: 18, offset: 0}" :lg="{span: 16, offset: 0}" :xl="{span: 16, offset: 0}">
+            <user-statistics></user-statistics>
+          </el-col>
+        </el-row>
+        <el-row class="graph-section" justify="center">
+          <el-col class="main-graph" :xs="{span: 24, offset: 0}" :sm="{span: 18, offset: 0}" :md="{span: 18, offset: 0}" :lg="{span: 16, offset: 0}" :xl="{span: 16, offset: 0}">
+            <global-graph :wallets="wallets" :currentWallet="currentWallet" @showWallet="chooseWallet"></global-graph>
+          </el-col>
+        </el-row>
+        <el-row class="secondary-section" justify="center">
+          <el-col class="scoped-graph" :xs="{span: 24, offset: 0}" :sm="{span: 10, offset: 0}" :md="{span: 10, offset: 0}" :lg="{span: 8, offset: 0}" :xl="{span: 8, offset: 0}">
+            <scoped-graph :currentWallet="currentWallet" :minValue="10"></scoped-graph>
+          </el-col>
+          <el-col class="composition-table" :xs="{span: 24, offset: 0}" :sm="{span: 18, offset: 0}" :md="{span: 18, offset: 0}" :lg="{span: 16, offset: 0}" :xl="{span: 16, offset: 0}">
+            <composition-table :wallet="currentWallet" :minValue="10"></composition-table>
+          </el-col>
+        </el-row>
       </el-row>
-    </el-row>
-  </div>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -68,13 +70,12 @@
     },
     data() {
       return {
-        dates:{}
+        dates:{},
       };
     },
     components: { ScopedGraph, GlobalGraph, CompositionTable, UserStatistics },
     computed: {
-      ...mapState(useWalletStore, ['wallets']),
-      ...mapState(useWalletStore, ['currentWallet'])
+      ...mapState(useWalletStore, ['wallets', 'currentWallet', 'loadingWallets']),
     },
     methods: {
       chooseWallet(account) {
@@ -96,6 +97,8 @@
   @import '../styles/variables.scss';
   .main-title {
     font-weight: 700;
+    font-size: 40px;
+    width: 100%;
   }
   .statistics-section{
     width: 100%;
