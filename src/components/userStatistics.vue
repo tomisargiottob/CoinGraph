@@ -4,12 +4,12 @@
       <el-col :span="6">
         <el-row class="counter">
           {{apiKeys.length}}</el-row>
-        <el-row class="counter-description"> Billeteras añadidas</el-row>
+        <el-row class="counter-description"> Billeteras&nbsp;<span class="hide-mobile">añadidas</span></el-row>
       </el-col>
       <el-col :span="6">
         <el-row class="counter">
           {{walletValue}} $</el-row>
-        <el-row class="counter-description"> Valor de cartera</el-row>
+        <el-row class="counter-description"> Valor&nbsp;<span class="hide-mobile">de cartera</span></el-row>
       </el-col>
       <el-col :span="6">
         <el-row class="counter">
@@ -19,7 +19,7 @@
       <el-col :span="6">
         <el-row class="counter">
           {{cryptoWeight}}</el-row>
-        <el-row class="counter-description"> Mayor porcentaje </el-row>
+        <el-row class="counter-description"> Mayor&nbsp;<span class="show-mobile">%</span><span class="hide-mobile">porcentaje</span> </el-row>
       </el-col>
     </el-row>
   </div>
@@ -56,5 +56,17 @@
     .counter-description{
       place-content: center;
     }
+    .show-mobile{
+      display: none;
+    }
+  }
+  
+   @media screen and (max-width: 850px) {
+      .show-mobile{
+        display: block;
+      }
+      .hide-mobile{
+        display: none;
+      }
   }
 </style>
