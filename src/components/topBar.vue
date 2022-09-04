@@ -14,13 +14,24 @@
             <el-image src="./coinGraphMin.png"/>
           </el-menu-item>
         </el-col>
-        <el-col v-if="authStore.authenticated" :span="14">
+        <el-col v-if="authStore.authenticated" :xs="0" :sm="0" :md="14" :lg="14" :xl="14">
           <el-row justify="end">
             <el-menu-item index="1">Dashboard</el-menu-item>
             <el-sub-menu index="2">
               <template #title>Perfil</template>
               <el-menu-item index="2-2">Configuración</el-menu-item>
             <hr>
+              <el-menu-item index="2-3">Cerrar Sesión</el-menu-item>
+            </el-sub-menu>	
+          </el-row>
+        </el-col>
+        <el-col v-if="authStore.authenticated" :xs="14" :sm="14" :md="0" :lg="0" :xl="0">
+          <el-row justify="end">
+            <el-sub-menu index="3">
+              <template #title><span class="mobile-icon">Menu</span></template>
+              <el-menu-item index="1">Dashboard</el-menu-item>
+              <el-menu-item index="2-2">Configuración</el-menu-item>
+              <hr>
               <el-menu-item index="2-3">Cerrar Sesión</el-menu-item>
             </el-sub-menu>	
           </el-row>
@@ -76,9 +87,9 @@
 .el-sub-menu,
 .el-sub-menu__title {
   font-size: 1.2rem;
+  font-family: Arial, sans-serif;
   min-width: 80px;
   padding: 0px 2%;
-  // font-weight: 600;
   .is-active, &:hover, &:focus{
     background-color: white !important;
   }
@@ -99,6 +110,10 @@
       border: 2px solid #409eff;
       font-weight: 700;
     }
+  }
+  .mobile-icon{
+    font-size:20px;
+    margin-right: 40px;
   }
 
 }
