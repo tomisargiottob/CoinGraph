@@ -96,7 +96,7 @@
             <el-row>
               <el-col>
                 <div class="icon-container">
-                  <el-icon class="action-icon" ><Avatar /></el-icon>
+                  <el-icon class="action-icon"><Avatar /></el-icon>
                 </div>
               </el-col>
               <el-col>
@@ -140,6 +140,22 @@
         </el-row>
       </el-col>
     </el-row>
+    <el-row justify="center" class="last-call">
+      <el-col :xs="20" :sm="16" :md="12" :lg="8" :xl="6">
+        <p class="call-text">
+          Estás a un solo paso de empezar a controlar tus inversiones y poder medir tu desempeño en el tiempo.
+        </p>
+        <p class="call-quote">
+          "Lo que no se mide, no se puede mejorar"
+        </p> 
+        <span>
+          William Thomson Kelvin
+        </span>
+        <el-button class="call-button" @click="redirectTo('Register')">
+          Empezar
+        </el-button>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -169,7 +185,6 @@
 <style lang="scss" scoped>
   @import '../styles/variables.scss';
   .body{
-    padding: 0px 20px;
     line-height: 32.4px;
     .el-row{
       width:100%;
@@ -229,7 +244,7 @@
         width: 36vw;
         left: calc(-18vw + 50%);
         border: none;
-        border-top: dotted 7px;
+        border-top: dashed 3px;
       }
       .icon-container{
         background-color: white;
@@ -239,7 +254,7 @@
         margin: 0 auto;
         .action-icon{
           padding-top: 7px;
-          font-size: 5rem;
+          font-size: 5rem;      
           color: $buttonColor;
         }
       }
@@ -261,6 +276,33 @@
           text-align: center;
           opacity: 0.15;            
         }
+      }
+    }
+    .last-call{
+      background: rgb(25,62,148);
+      background: linear-gradient(0deg, rgba(25,62,148,1) 0%, rgba(48,101,168,1) 49%, rgba(24,108,195,1) 100%);
+      .call-text{
+        color: white;
+        font-size: 1.2rem;
+        margin-top: 30px;
+      }
+      .call-quote{
+        color: white;
+        width: 100%;
+        font-size: 1.5rem;
+        font-style: italic;
+      }
+      span{
+        font-style: normal;
+        color: white;
+        display: block;
+        margin-bottom: 20px;
+      }
+      .call-button{
+        max-width: 100px;
+        color: $buttonColor;
+        font-weight: 900;
+        margin-bottom: 20px;
       }
     }
   }
