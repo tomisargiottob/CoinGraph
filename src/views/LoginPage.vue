@@ -56,7 +56,7 @@ if (router.currentRoute.value?.meta?.show === 'register') {
 </script>
 <style>
   .login-form{
-      min-height: 90vh;
+      min-height: 80vh;
       width: 100%;
       padding: 70px 0%;
   }

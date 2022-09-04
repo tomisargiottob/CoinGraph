@@ -62,6 +62,7 @@
 <style lang="scss">
 .user-management{
   margin-top: 20px;
+  min-height: 80vh;
   .user-management-items {
     height:100%;
     place-items: center;

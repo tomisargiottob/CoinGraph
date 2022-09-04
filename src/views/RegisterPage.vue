@@ -141,7 +141,6 @@
       background-image: url("../assets/login-bg.jpg");
       background-repeat: no-repeat;
       background-size: cover;
-      min-height: 90vh;
       width: 100%;
       padding: 100px 40px;
   }
@@ -153,7 +152,6 @@
       background:white;
       border-radius: 15px;
       padding: 25px;
-      min-height: 40vh;
       margin: 0 auto;
       margin-top: 50px;
   }
