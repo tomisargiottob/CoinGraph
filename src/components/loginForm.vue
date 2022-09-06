@@ -9,21 +9,21 @@
         @keyup.enter="submitAction(ruleFormRef)"
     >
         <el-form-item prop="username" >
-            <el-input required="true" placeholder="Correo electrónico" v-model="formLabelAlign.username" />
+            <el-input required="true" :placeholder="$t('loginCommon.email')" v-model="formLabelAlign.username" />
         </el-form-item>
         <el-form-item prop="password">
-            <el-input required="true" type="password" placeholder="Contraseña" v-model="formLabelAlign.password" />
+            <el-input required="true" type="password" :placeholder="$t('loginCommon.password')" v-model="formLabelAlign.password" />
         </el-form-item>
         <el-form-item>
             <el-button type="primary" 
                 @click="submitAction(ruleFormRef)"                     
             >
-                Entrar
+              {{$t('loginForm.button')}}
             </el-button>
         </el-form-item>
     </el-form>
     <div>
-        <span class="action-text" @click="onDisplayRecoverForm">¿Has olvidado la contraseña?</span>
+        <span class="action-text" @click="onDisplayRecoverForm">{{$t('loginForm.forgotPassword')}}</span>
     </div>
   </div>
 </template>

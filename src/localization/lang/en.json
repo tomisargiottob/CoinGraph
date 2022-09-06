@@ -1,0 +1,67 @@
+{
+  "landingPage": {
+    "title": "Your crypto investments tracked in one place",
+    "subtitle":"Check all your crypto investments in one place. View your historic returns and composition of your portfolio at all times.",
+    "actionButton":"Sign in",
+    "benefits": {
+      "refresh": {
+        "title": "Daily refresh of the value of all your wallets.",
+        "description":"You can add as many accounts as you want. We have integrated multiple exchanges and wallets. In case you want to track manually, you can add your crypto holdings manually."
+      },
+      "money": {
+        "title": "Analize the retuns of each cryptocurrency. ",
+        "description":"Gather in one single place all your cryptocurrency investments so you can check where you are earning the most and where you should take action."
+      },
+      "dataLine": {
+        "title": "Use the graphs to select diferent dates and compare your holdings value.",
+        "description":"Use the historic information gathered and compare the performance of every wallet in one place and save a lot of time. "
+      }
+    },
+    "actions": {
+      "firstStep":"Create your account",
+      "secondStep": "Connect your wallets",
+      "thirdStep": "Analyze the performance of your investments"
+    },
+    "lastCall": {
+      "text": "You are just one step away from starting to control your investments and messuring the returns over time.",
+      "quote":"\"You can't manage what you dont measure\"",
+      "button": "Begin"
+    }
+  },
+  "topBar": {
+    "dashboard": "Dashboard",
+    "configuration": "Configuration",
+    "closeSesion": "Close sesion",
+    "logIn": "Log in",
+    "signUp": "Sign up"
+  },
+  "commonButtons": {
+    "goBack": "Go back",
+    "logIn": "Log in"
+  },
+  "loginView": {
+    "registerSugestion": "Don't have an account yet?",
+    "signUp": "Register"
+  },
+  "loginCommon": {
+    "email": "Email",
+    "password": "Password"
+  },
+  "loginForm": {
+    "button": "Log in",
+    "forgotPassword": "Have you forgotten your password?"
+  },
+  "recoverForm": {
+    "title": "We will send you a code to your email so you can recover your password.",
+    "sendButton":"Send email"
+  },
+  "registerForm": {
+    "title":"Register so you can track all your crypto portfolio",
+    "checkPassword": "Repeat your password",
+    "firstName": "Introduce your first name",
+    "surname": "Introduce your surname",
+    "birthDate": "Select your birth date",
+    "submitRegister": "Register",
+    "existentAccount": "I already have an account"
+    }
+}

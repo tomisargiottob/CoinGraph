@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="call-action">Registrate para poder hacer seguimiento a tu cartera de inversion</h1>
+    <h1 class="call-action">{{$t('registerForm.title')}}</h1>
     <el-form
         ref="ruleFormRef"
         label-width="100px"
@@ -9,26 +9,26 @@
         style="max-width: 460px"
     >
         <el-form-item prop="username" v-if="!secondPage">
-            <el-input required="true" placeholder="Correo electrónico" v-model="registerInfo.username" />
+            <el-input required="true" :placeholder="$t('loginCommon.email')" v-model="registerInfo.username" />
         </el-form-item>
         <el-form-item prop="password" v-if="!secondPage">
-            <el-input required="true" type="password" placeholder="Contraseña" v-model="registerInfo.password" />
+            <el-input required="true" type="password" :placeholder="$t('loginCommon.password')" v-model="registerInfo.password" />
         </el-form-item>
         <el-form-item prop="passwordControl" v-if="!secondPage">
-            <el-input required="true" type="password" placeholder="Repite tu contraseña" v-model="registerInfo.passwordControl" />
+            <el-input required="true" type="password" :placeholder="$t('registerForm.checkPassword')"  v-model="registerInfo.passwordControl" />
         </el-form-item>
         <el-form-item prop="firstName" v-if="secondPage">
-            <el-input required="true"  placeholder="Introduzca su nombre" v-model="registerInfo.firstName" />
+            <el-input required="true"  :placeholder="$t('registerForm.firstName')"  v-model="registerInfo.firstName" />
         </el-form-item>
         <el-form-item prop="surname"  v-if="secondPage">
-            <el-input required="true" placeholder="Introduzca su apellido" v-model="registerInfo.surname" />
+            <el-input required="true" :placeholder="$t('registerForm.surname')" v-model="registerInfo.surname" />
         </el-form-item>
         <el-form-item prop="birthDate"  v-if="secondPage" class="date-picker">
           <el-date-picker
             class="date-picker"
             v-model="registerInfo.birthDate"
             type="date"
-            placeholder="Seleccione fecha de nacimiento"
+            :placeholder="$t('registerForm.birthDate')" 
             size="default"
           />
         </el-form-item>
@@ -36,18 +36,18 @@
             <el-button type="primary" v-if="secondPage"
                 @click="goBack"                     
             >
-                Atras
+                {{$t('commonButtons.goBack')}}
             </el-button>
             <el-button type="primary" 
                 @click="submitRegister(ruleFormRef)"                     
             >
-                Registrarme
+                {{$t('registerForm.submitRegister')}}
             </el-button>
         </el-form-item>
         <hr>	
         <div class="register">
-            <p>¿Ya tienes cuenta?</p>
-            <span class="action-text" @click="emit('displayLogin','login')">Iniciar sesión</span>
+            <p>{{$t('registerForm.existentAccount')}}</p>
+            <span class="action-text" @click="emit('displayLogin','login')">{{$t('commonButtons.logIn')}}</span>
         </div>
     </el-form>
   </div>

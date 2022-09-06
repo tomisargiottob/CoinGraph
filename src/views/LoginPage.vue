@@ -7,8 +7,8 @@
             <register-form v-if="form === 'register'" @displayLogin="displayForm('login')" @goHome="redirectHome"></register-form>
             <hr v-if="form !== 'register'">	
             <div class="register" v-if="form !== 'register'">
-                <p>¿No tienes cuenta?</p>
-                <span class="action-text" @click="displayForm('register')">Regístrate</span>
+                <p>{{$t('loginView.registerSugestion')}}</p>
+                <span class="action-text" @click="displayForm('register')">{{$t('loginView.signUp')}}</span>
             </div>
         </div>
     </div>

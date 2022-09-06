@@ -1,0 +1,67 @@
+{
+  "landingPage": {
+    "title": "Controlá el rendimiento de tus carteras crypto",
+    "subtitle":"Monitorizá tus inversiones en crypto desde un mismo lugar. Consulta el historico de rendimientos y composicion de tu cartera en cada momento.",
+    "actionButton":"Crear cuenta",
+    "benefits": {
+      "refresh": {
+        "title": "Actualización diaria del valor global de tus inversiones.",
+        "description":"Puedes agregar todas las cuentas de Exchange que quieras controlar de tu cartera de inversión y también de forma manual aquellas cryptomonedas que se encuentren en otras carteras no trackeables."
+      },
+      "money": {
+        "title": "Analiza las rentabilidades de tus cryptomonedas. ",
+        "description":"Controla desde un mismo punto todas tus inversiones para que puedas medir donde se encuentran tus jugadas ganadoras y donde debes cortar las perdidas."
+      },
+      "dataLine": {
+        "title": "Navega las graficas y viajá por el historico de registros.",
+        "description":"Revisá el historico de inversiones de forma grafica en un mismo lugar y ahorrate el tiempo de revisar cada una de tus cuentas."
+      }
+    },
+    "actions": {
+      "firstStep":"Creá tu cuenta",
+      "secondStep": "Conectá tus carteras",
+      "thirdStep": "Analizá el resultado de tus inversiones"
+    },
+    "lastCall": {
+      "text": "Estás a un solo paso de empezar a controlar tus inversiones y poder medir tu desempeño en el tiempo.",
+      "quote":"\"Lo que no se mide, no se puede mejorar\"",
+      "button": "Empezar"
+    }
+  },
+  "topBar": {
+    "dashboard": "Dashboard",
+    "configuration": "Configuración",
+    "closeSesion": "Cerrar Sesión",
+    "logIn": "Ingresar",
+    "signUp": "Registrarse"
+  },
+  "commonButtons": {
+    "goBack": "Volver atras",
+    "logIn": "Iniciar sesion"
+  },
+  "loginView": {
+    "registerSugestion": "¿No tienes cuenta?",
+    "signUp": "Registrarse"
+  },
+  "loginCommon": {
+    "email": "Correo electrónico",
+    "password": "Contraseña"
+  },
+  "loginForm": {
+    "button": "Entrar",
+    "forgotPassword": "¿Has olvidado la contraseña?"
+  },
+  "recoverForm": {
+    "title": "Enviaremos un código a tu correo electrónico para que puedas recuperar tu contraseña",
+    "sendButton":"Enviar correo"
+  },
+  "registerForm": {
+    "title":"Registrate para poder hacer seguimiento a tu cartera de inversion",
+    "checkPassword": "Repite tu contraseña",
+    "firstName": "Introduzca su nombre",
+    "surname": "Introduzca su apellido",
+    "birthDate": "Seleccione la fecha de nacimiento",
+    "submitRegister": "Registrarme",
+    "existentAccount": "¿Ya tienes cuenta?"
+    }
+}

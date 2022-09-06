@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="call-action">Enviaremos un código a tu correo electrónico para que puedas recuperar tu contraseña</h1>
+    <h1 class="call-action">{{$t('recoverForm.title')}}</h1>
     <el-form
         ref="recoverForm"
         label-width="100px"
@@ -9,13 +9,13 @@
         style="max-width: 460px"
     >
       <el-form-item prop="email">
-        <el-input required="true" placeholder="Correo electrónico" v-model="recoverData.email" />
+        <el-input required="true" :placeholder="$t('loginCommon.email')" v-model="recoverData.email" />
       </el-form-item>
         <el-form-item>
           <el-button type="primary" 
               @click="recoverAccount(recoverForm)"                     
           >
-            Enviar correo
+            {{$t('recoverForm.sendButton')}}
           </el-button>
       </el-form-item>
    
@@ -23,7 +23,7 @@
         <el-button type="primary" 
             @click="goBack()"                     
         >
-          Volver atras
+          {{$t('recoverForm.goBack')}}
         </el-button>
       </el-form-item>
     </el-form>
