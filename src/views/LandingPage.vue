@@ -5,19 +5,19 @@
         <el-row justify="center">
           <el-col :xs="22" :sm="22" :md="18" :lg="16" :xl="14">
             <h1 class="primary-title">
-              Controlá el rendimiento de tus carteras crypto
+              {{$t('landingPage.title')}}
             </h1>
           </el-col>
         </el-row>
         <el-row justify="center">
           <el-col :xs="20" :sm="20" :md="12" :lg="10" :xl="8">
             <p class="secondary-title">
-              Monitorizá tus inversiones en crypto desde un mismo lugar. Consulta el historico de rendimientos y composicion de tu cartera en cada momento. 
+              {{$t('landingPage.subtitle')}} 
             </p>
           </el-col>
           <el-col :span="18">
             <el-button type="primary" class="call-action" @click="redirectTo('Register')">
-              Crear cuenta
+              {{$t('landingPage.actionButton')}} 
             </el-button>
           </el-col>
         </el-row>
@@ -40,28 +40,28 @@
           <el-col class="benefit-column" :xs="22" :sm="22" :md="8" :lg="8" :xl="8">
             <el-icon class="benefit-icon"><Refresh /></el-icon>
             <h2>
-              Actualización diaria del valor global de tus inversiones. 
+              {{$t('landingPage.benefits.refresh.title')}} 
             </h2> 
             <p>
-              Puedes agregar todas las cuentas de Exchange que quieras controlar de tu cartera de inversión y también de forma manual aquellas cryptomonedas que se encuentren en otras billeteras no trackeables.
+              {{$t('landingPage.benefits.refresh.description')}} 
             </p>
           </el-col>
           <el-col class="benefit-column" :xs="22" :sm="22" :md="8" :lg="8" :xl="8">
             <el-icon class="benefit-icon"><Money /></el-icon>
              <h2>
-              Analiza las rentabilidades de tus cryptomonedas. 
+              {{$t('landingPage.benefits.money.title')}} 
             </h2> 
             <p>
-              Controla desde un mismo punto todas tus inversiones para que puedas medir donde se encuentran tus jugadas ganadoras y donde debes cortar las perdidas.
+              {{$t('landingPage.benefits.money.description')}} 
             </p>
           </el-col>
           <el-col class="benefit-column"  :xs="22" :sm="22" :md="8" :lg="8" :xl="8">
             <el-icon class="benefit-icon"><DataLine /></el-icon>
              <h2>
-              Navega las graficas y viajá por el historico de registros.
+              {{$t('landingPage.benefits.dataLine.title')}} 
             </h2> 
             <p>
-              Revisá el historico de inversiones de forma grafica en un mismo lugar y ahorrate el tiempo de revisar cada una de tus cuentas.
+              {{$t('landingPage.benefits.dataLine.description')}} 
             </p>
           </el-col>
         </el-row>
@@ -102,7 +102,7 @@
               <el-col>
                 <div class="action-text">
                   <span class="progress-number">01</span>
-                  <p> Creá tu cuenta </p>
+                  <p> {{$t('landingPage.actions.firstStep')}}   </p>
                 </div>
               </el-col>
             </el-row> 
@@ -117,7 +117,7 @@
               <el-col>
                 <div class="action-text">
                   <span class="progress-number">02</span>
-                  <p> Conectá la billetera de tus exchanges </p>
+                  <p> {{$t('landingPage.actions.secondStep')}} </p>
                 </div>
               </el-col>
             </el-row> 
@@ -132,7 +132,7 @@
               <el-col>
                 <div class="action-text">
                   <span class="progress-number">03</span>
-                  <p> Analizá el resultado de tus inversiones </p>
+                  <p> {{$t('landingPage.actions.thirdStep')}} </p>
                 </div>
               </el-col>
             </el-row>     
@@ -143,16 +143,16 @@
     <el-row justify="center" class="last-call">
       <el-col :xs="20" :sm="16" :md="12" :lg="8" :xl="6">
         <p class="call-text">
-          Estás a un solo paso de empezar a controlar tus inversiones y poder medir tu desempeño en el tiempo.
+          {{$t('landingPage.lastCall.text')}}
         </p>
         <p class="call-quote">
-          "Lo que no se mide, no se puede mejorar"
+          {{$t('landingPage.lastCall.quote')}}
         </p> 
         <span>
           William Thomson Kelvin
         </span>
         <el-button class="call-button" @click="redirectTo('Register')">
-          Empezar
+          {{$t('landingPage.lastCall.button')}}
         </el-button>
       </el-col>
     </el-row>
