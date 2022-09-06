@@ -7,9 +7,21 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import TopBar from './components/topBar.vue';
 import FooterComponent from './components/footerComponent.vue';
+import { useConfigStore } from './store/configStore';
+
+export default {
+  name: 'App',
+  components: { TopBar, FooterComponent},
+  mounted() {
+    const configStore = useConfigStore();
+    const language = configStore.getUserLanguage();
+    this.$i18n.locale= language || 'en';
+    configStore.setUserLanguage(language || 'en');
+  }
+}
 
 </script>
 
