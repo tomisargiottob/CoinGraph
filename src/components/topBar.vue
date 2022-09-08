@@ -8,7 +8,7 @@
 	>
     <el-row class="main-menu"> 
       <el-col v-if="authStore.authenticated" :span="24">
-        <el-row justify="left">
+        <el-row justify="start">
           <el-col :span="10">
             <el-menu-item index="0">
               <el-image src="./coinGraphMin.png"/>
@@ -19,7 +19,7 @@
               <toggle-language />
               <el-menu-item index="1">{{ $t('topBar.dashboard') }}</el-menu-item>
               <el-sub-menu index="2">
-                <template #title>Perfil</template>
+                <template #title>{{ $t('topBar.profile') }}</template>
                 <el-menu-item index="2-2">{{ $t('topBar.configuration') }}</el-menu-item>
               <hr>
                 <el-menu-item index="2-3">{{ $t('topBar.closeSesion') }}</el-menu-item>
@@ -126,7 +126,7 @@
       max-width: 180px;
     }
     padding: 10px;
-    padding-top: 15px;
+    padding-top: 10px;
     .log-in{
       border: 2px solid #409eff;
       font-weight: 700;

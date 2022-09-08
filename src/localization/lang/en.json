@@ -62,6 +62,16 @@
     "surname": "Introduce your surname",
     "birthDate": "Select your birth date",
     "submitRegister": "Register",
-    "existentAccount": "I already have an account"
+    "existentAccount": "I already have an account",
+    "validation":{
+      "email": "Por favor ingrese un correo electrónico valido",
+      "noPassword": "Por favor ingrese una contraseña",
+      "password": "La contraseña debe tener al menos 8 caracteres",
+      "controlPassword": "Las contraseñas no coinciden",
+      "noControlPassword": "Por favor ingrese una contraseña valida",
+      "validBirthDate":"Por favor ingrese su fecha de nacimiento",
+      "minimunAge":"La edad mínima es 12 años"
+    }
+  },
     }
 }

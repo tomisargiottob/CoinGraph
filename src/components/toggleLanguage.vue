@@ -61,7 +61,7 @@ export default {
       border-radius: 5px;
       color: $buttonColor
     }
-    margin: 11px 8px 8px 8px;
+    margin: 9px 8px 8px 0px;
     padding: 0px 10px 7px 10px;
     .active-language{
       margin-right: 10px;

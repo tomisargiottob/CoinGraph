@@ -18,10 +18,10 @@
             <el-input required="true" type="password" :placeholder="$t('registerForm.checkPassword')"  v-model="registerInfo.passwordControl" />
         </el-form-item>
         <el-form-item prop="firstName" v-if="secondPage">
-            <el-input required="true"  :placeholder="$t('registerForm.firstName')"  v-model="registerInfo.firstName" />
+            <el-input :placeholder="$t('registerForm.firstName')"  v-model="registerInfo.firstName" />
         </el-form-item>
         <el-form-item prop="surname"  v-if="secondPage">
-            <el-input required="true" :placeholder="$t('registerForm.surname')" v-model="registerInfo.surname" />
+            <el-input :placeholder="$t('registerForm.surname')" v-model="registerInfo.surname" />
         </el-form-item>
         <el-form-item prop="birthDate"  v-if="secondPage" class="date-picker">
           <el-date-picker
@@ -39,7 +39,7 @@
                 {{$t('commonButtons.goBack')}}
             </el-button>
             <el-button type="primary" 
-                @click="submitRegister(ruleFormRef)"                     
+                @click="submitRegister('ruleFormRef')"                     
             >
                 {{$t('registerForm.submitRegister')}}
             </el-button>
@@ -53,70 +53,85 @@
   </div>
 </template>
 
-<script setup>
+<script>
   import { useAuthStore } from "../store/authStore";
   import { validateEmail, submitForm } from '../utils/utils';
-  import { ref, reactive } from 'vue'
 
-  const emit = defineEmits(['goHome, displayLogin'])
+  export default {
+    name: 'registerForm',
+    data() {
+      return {
+        registerInfo: {
+          username: '',
+          password: '',
+          firstName: '',
+          surname: '',
+          passwordControl:'',
+          birthDate:'',
+        },
+        correctErrors: '',
+        ruleFormRef: '',
+        rules: {
+          username: [
+            { validator: validateEmail, trigger: 'blur' },
+          ],
+          password: [
+            { required: true, message: this.$t('registerForm.validate.noPassword'), trigger: 'blur' },
+            { min: 8, message: this.$t('registerForm.validate.password'), trigger: 'blur' },
+          ],
+          passwordControl: [{ validator: this.validatePassword, trigger: 'blur' }],
+        },
+        secondPage: false,
+      }
+    },
+    methods: {
+      validatePassword(rule, value, callback) {
+        if (value === '') {
+          callback(new Error(this.$t('registerForm.validate.noControlPassword')))
+        } else if(this.registerInfo.password !== value) {
+          callback(new Error(this.$t('registerForm.validate.controlPassword')))
+        }else {
+          callback()
+        }
+      },
+      validateBirthDate(rule, value, callback) {
+        const age = new Date(value).getFullYear() - new Date().getFullYear()
+        if (value === '') {
+          callback(new Error(this.$t('registerForm.validate.validBirthDate')))
+        } else if(100 > age  > 12 ) {
+          callback(new Error(this.$t('registerForm.validate.minimunAge')))
+        }else {
+          callback()
+        }
+      },
+      goBack() {
+        this.secondPage = false;
+        delete this.rules['birthDate']
+      },
+      async submitRegister(form) {
+        const formToSend = this.$refs[form];
+        try {
+          if (this.secondPage) {
+            this.rules['birthDate'] = [{ validator: this.validateBirthDate, trigger: 'blur'}]
+          }
+          await formToSend.validate();
+        } catch {
+          return;
+        }
+        if (!this.secondPage) {
+          this.secondPage= true;
+          return;
+        }
+        await submitForm(formToSend, async () => {
+          const authStore = useAuthStore();
+          delete this.registerInfo.passwordControl
+          await authStore.registerUser(this.registerInfo);
+          this.$emit('goHome');
+        })
+      }
+    },
+  }
 
-  const authStore = useAuthStore();
-  const registerInfo = reactive({
-    username: '',
-    password: '',
-    firstName: '',
-    surname: '',
-    passwordControl:'',
-    birthDate:'',
-  })
-  const ruleFormRef = ref();
-  const validatePass= (rule, value, callback) => {
-    if (value === '') {
-        callback(new Error('Por favor ingrese una contraseña valida'))
-    } else if(registerInfo.password !== value) {
-      callback(new Error('Las contraseñas no coinciden'))
-    }else {
-      callback()
-    }
-  }
-  const validateBirthDate = (rule, value, callback) => {
-    const age = new Date(value).getFullYear() - new Date().getFullYear()
-    if (value === '') {
-      callback(new Error('Por favor ingrese una fecha de nacimiento valida'))
-    } else if(100 > age  > 17 ) {
-      callback(new Error('La edad indicada es menor a 18 años'))
-    }else {
-      callback()
-    }
-  }
-  const rules = reactive({
-      username: [
-        { validator: validateEmail, trigger: 'blur' },
-      ],
-      password: [
-          { required: true, message: 'Please input password', trigger: 'blur' },
-          { min: 8, message: 'La contraseña debe tener al menos 8 caracteres', trigger: 'blur' },
-      ],
-      passwordControl: [{ validator: validatePass, trigger: 'blur' }],
-      birthDate: [{ validator: validateBirthDate, trigger: 'blur' }],
-  })
-
-  let secondPage = ref(false)
-  const goBack = () => {
-    secondPage.value = false;
-  }
-
-  const submitRegister = async (form) => {
-    if (!secondPage.value) {
-      secondPage.value= true;
-      return;
-    }
-    await submitForm(form, async () => {
-      delete registerInfo.passwordControl
-      await authStore.registerUser(registerInfo);
-      emit('goHome');
-    })
-  }
 
 </script>
 
