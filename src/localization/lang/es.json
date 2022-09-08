@@ -73,5 +73,8 @@
       "minimunAge":"The minimun age is 12 Y.O."
     }
   },
+  "dashboardView": {
+    "noWallets": "No se han encontrado registros del usuario, por favor asegurate de haber conectado las cuentas a seguir o agregar manualmente tus cryptos.",
+    "profile": "Perfil"
     }
 }

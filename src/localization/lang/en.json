@@ -73,5 +73,8 @@
       "minimunAge":"La edad mínima es 12 años"
     }
   },
+  "dashboardView": {
+    "noWallets": "You haven't registered any wallets or cryptocurrencies in your account. Please connect one or add cryptocurrencies manually to start working.",
+    "profile": "Profile"
     }
 }

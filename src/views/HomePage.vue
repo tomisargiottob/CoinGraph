@@ -10,11 +10,11 @@
         </el-col>
         <el-col class="warning-place" :span="12">      
           <h2>
-            No se han encontrado registros del usuario, por favor asegurate de haber conectado las cuentas a seguir o agregar manualmente tus cryptos
+            {{$t('dashboardView.noWallets')}}
           </h2>
           <RouterLink to="/profile">
             <span class="link-button">
-              Perfil
+              {{$t('dashboardView.profile')}}
             </span>
           </RouterLink>
         </el-col>
@@ -50,7 +50,6 @@
 <script>
 
   import { ElMessage } from 'element-plus'
-  // import DatePicker from '../components/datePicker.vue';
   import ScopedGraph from '../components/scopedGraph.vue';
   import GlobalGraph from '../components/globalGraph.vue';
   import CompositionTable from '../components/compositionTable.vue';
