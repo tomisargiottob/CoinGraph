@@ -33,7 +33,8 @@
     "configuration": "Configuración",
     "closeSesion": "Cerrar Sesión",
     "logIn": "Ingresar",
-    "signUp": "Registrarse"
+    "signUp": "Registrarse",
+    "profile": "Profile"
   },
   "commonButtons": {
     "goBack": "Volver atras",
@@ -41,7 +42,10 @@
   },
   "loginView": {
     "registerSugestion": "¿No tienes cuenta?",
-    "signUp": "Registrarse"
+    "signUp": "Registrarse",
+    "loginFormTitle":"Iniciar sesión",
+    "registerFormTitle":"Registrarse",
+    "recoverFormTitle":"Recuperar contraseña"
   },
   "loginCommon": {
     "email": "Correo electrónico",
@@ -76,5 +80,5 @@
   "dashboardView": {
     "noWallets": "No se han encontrado registros del usuario, por favor asegurate de haber conectado las cuentas a seguir o agregar manualmente tus cryptos.",
     "profile": "Perfil"
-    }
+  }
 }

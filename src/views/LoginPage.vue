@@ -1,7 +1,7 @@
 <template>
     <div class="login-form">
         <div id="login-panel">
-          <h1>{{ saludo }}</h1>
+          <h1>{{ formTitle }}</h1>
             <login-form v-if="form === 'login'" @goHome="redirectHome" @displayRecoverForm="displayForm('forgotPassword')"></login-form>
             <recover-account v-if="form === 'forgotPassword'" @goBack="displayForm('login')"></recover-account>
             <register-form v-if="form === 'register'" @displayLogin="displayForm('login')" @goHome="redirectHome"></register-form>
@@ -14,42 +14,49 @@
     </div>
 </template>
 
-<script setup>
+<script>
 import { useAuthStore } from '../store/authStore';
 import { useRouter } from 'vue-router'
-import { ref } from 'vue';
 import recoverAccount from '../components/recoverAccount.vue';
 import loginForm from '../components/loginForm.vue';
 import registerForm from '../components/registerForm.vue';
 
-
-const router = useRouter();
-const authStore = useAuthStore();
-
-const redirectHome = () => {
-  router.push({ name: 'Home' });
-}
-const saludo = ref('Iniciar sesión')
-const form = ref('login')
-
-const displayForm = (selectedForm) => {
-  form.value = selectedForm;
-  if (selectedForm === 'login') {
-    saludo.value = 'Iniciar sesión';
-  } else if (selectedForm === 'forgotPassword') {
-    saludo.value = 'Recuperar contraseña';
-  } else {
-    saludo.value = 'Registrarse'
-  }
-}
-const token = sessionStorage.getItem('x-access-token');
-if (token) {
-  authStore.setAuthenticated();
-  redirectHome();
-}
-
-if (router.currentRoute.value?.meta?.show === 'register') {
-  displayForm('register');
+export default {
+  name: 'loginPage',
+  components: { recoverAccount, loginForm, registerForm },
+  mounted() {
+    const authStore = useAuthStore();
+    const router = useRouter();
+    const token = sessionStorage.getItem('x-access-token');
+    if (token) {
+      authStore.setAuthenticated();
+      this.redirectHome();
+    }
+    if (router.currentRoute.value?.meta?.show === 'register') {
+      this.displayForm('register');
+    }
+  },
+  data() {
+    return {
+      formTitle: this.$t('loginView.loginFormTitle'),
+      form: 'login'
+    }
+  },
+  methods: {
+    redirectHome() {
+      this.$router.push({ name: 'Home' });
+    },
+    displayForm(selectedForm) {
+      this.form = selectedForm;
+      if (selectedForm === 'login') {
+        this.formTitle = this.$t('loginView.loginFormTitle');
+      } else if (selectedForm === 'forgotPassword') {
+        this.formTitle = this.$t('loginView.recoverFormTitle');
+      } else {
+        this.formTitle = this.$t('loginView.registerFormTitle')
+      }
+    }
+  },
 }
 
 

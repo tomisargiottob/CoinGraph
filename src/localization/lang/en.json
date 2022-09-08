@@ -33,7 +33,8 @@
     "configuration": "Configuration",
     "closeSesion": "Close sesion",
     "logIn": "Log in",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "profile": "Perfil"
   },
   "commonButtons": {
     "goBack": "Go back",
@@ -41,7 +42,10 @@
   },
   "loginView": {
     "registerSugestion": "Don't have an account yet?",
-    "signUp": "Register"
+    "signUp": "Register",
+    "loginFormTitle":"Log in",
+    "registerFormTitle":"Register",
+    "recoverFormTitle":"Recover account"
   },
   "loginCommon": {
     "email": "Email",
@@ -49,7 +53,7 @@
   },
   "loginForm": {
     "button": "Log in",
-    "forgotPassword": "Have you forgotten your password?"
+    "forgotPassword": "Forgot your password?"
   },
   "recoverForm": {
     "title": "We will send you a code to your email so you can recover your password.",
@@ -76,5 +80,5 @@
   "dashboardView": {
     "noWallets": "You haven't registered any wallets or cryptocurrencies in your account. Please connect one or add cryptocurrencies manually to start working.",
     "profile": "Profile"
-    }
+  }
 }

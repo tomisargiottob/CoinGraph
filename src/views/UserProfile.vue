@@ -2,7 +2,7 @@
 <template>
   <div>
     <el-row justify="center">
-      <h1>Perfil de {{user.firstName}}</h1>
+      <h1>Perfil de {{user.firstName || 'Anonymous'}}</h1>
     </el-row>
     <el-row>
       <el-col :span="22" :offset="1">
