@@ -11,9 +11,9 @@
       v-if="innerWidth>300"
       >
         <el-table-column fixed prop="coin" label="Crypto" min-width="100"/>
-        <el-table-column sortable prop="amount" label="Cantidad" min-width="100" />
-        <el-table-column sortable prop="value" label="Valor ($)" min-width="100"  />
-        <el-table-column sortable prop="marketPrice" label="Precio de Mercado ($)" min-width="150" v-if="innerWidth>800"/>
+        <el-table-column sortable prop="amount" :label="$t('dashboardView.compositionTable.cryptoAmount')" min-width="100" />
+        <el-table-column sortable prop="value" :label="$t('dashboardView.compositionTable.cryptoValue')" min-width="100"  />
+        <el-table-column sortable prop="marketPrice" :label="$t('dashboardView.compositionTable.marketPrice')" min-width="150" v-if="innerWidth>800"/>
       </el-table>
     </el-col>
   </el-row>

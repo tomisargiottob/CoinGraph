@@ -1,7 +1,7 @@
 <template>
   <el-row v-loading="loadingWallets" element-loading-text="Loading..." element-loading-background="rgba(256, 256, 256, 1)" justify="center">
     <el-col :span="24">
-      <h1 class="main-title">Dashboard</h1>
+      <h1 class="main-title">{{$t('dashboardView.title')}}</h1>
       <el-row v-if="!wallets.length" justify="center" class="home-view">
         <el-col class="icon-place" :span="24">
           <RouterLink to="/profile">
@@ -83,7 +83,7 @@
           walletStore.showAccount(account.id, account.type);
         } else {
           ElMessage({
-            message: 'No se ha recopilado informacion de la cartera en dicha fecha',
+            message: this.$t('dashboardView.noWalletRegister'),
             type: 'warning',
           })
         }

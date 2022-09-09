@@ -32,7 +32,7 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 function selectColor(asset) {
   let color = localStorage.getItem(asset);
   if (!color) {
-    color = `hsl(${Math.floor(Math.random() * 10) * 137.508 },50%,75%)`; // use golden angle approximation
+    color = `hsl(${Math.floor(Math.random() * 10) * 137.508 },50%,75%)`;
     localStorage.setItem(asset, color);
   }
   return color;

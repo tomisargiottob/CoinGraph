@@ -4,7 +4,7 @@
       <el-col :xs="24" :sm="10" :md="9" :l="7" :xl="5">
         <el-row>
           <span class="value-title">
-            Total cartera:
+            {{$t('dashboardView.globalGraph.totalValue')}}
           </span>
         </el-row>
         <el-row class="wallet-value" justify="end">
@@ -91,9 +91,7 @@ export default {
 
       if (points.length) {
         const firstPoint = points[0];
-        // const label = graph.data.labels[firstPoint.index];
         const index = graph.data.datasets[firstPoint.datasetIndex].additional[firstPoint.index]
-        // const value = graph.data.datasets[firstPoint.datasetIndex].data[firstPoint.index];
         this.$emit('showWallet', index)
       }
     }

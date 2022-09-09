@@ -28,10 +28,10 @@
               />
           </el-form-item>
           <el-form-item>
-            <el-button @click="searchDates($refs.datePickerForm)" type="primary" > Buscar </el-button>
+            <el-button @click="searchDates($refs.datePickerForm)" type="primary" > {{$t('dashboardView.globalGraph.searchDates')}} </el-button>
           </el-form-item>
           <el-form-item>
-            <el-button @click="resetDates" type="danger" > Reset </el-button>
+            <el-button @click="resetDates" type="danger" > {{$t('dashboardView.globalGraph.resetDates')}} </el-button>
           </el-form-item>
       </el-row>
     </el-form>
