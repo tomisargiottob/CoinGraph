@@ -76,8 +76,8 @@
             { validator: validateEmail, trigger: 'blur' },
           ],
           password: [
-            { required: true, message: this.$t('registerForm.validate.noPassword'), trigger: 'blur' },
-            { min: 8, message: this.$t('registerForm.validate.password'), trigger: 'blur' },
+            { required: true, message: this.$t('loginView.validation.noPassword'), trigger: 'blur' },
+            { min: 8, message: this.$t('loginView.validation.password'), trigger: 'blur' },
           ],
           passwordControl: [{ validator: this.validatePassword, trigger: 'blur' }],
         },
@@ -87,9 +87,9 @@
     methods: {
       validatePassword(rule, value, callback) {
         if (value === '') {
-          callback(new Error(this.$t('registerForm.validate.noControlPassword')))
+          callback(new Error(this.$t('loginView.validation.noControlPassword')))
         } else if(this.registerInfo.password !== value) {
-          callback(new Error(this.$t('registerForm.validate.controlPassword')))
+          callback(new Error(this.$t('loginView.validation.controlPassword')))
         }else {
           callback()
         }
@@ -97,9 +97,9 @@
       validateBirthDate(rule, value, callback) {
         const age = new Date(value).getFullYear() - new Date().getFullYear()
         if (value === '') {
-          callback(new Error(this.$t('registerForm.validate.validBirthDate')))
+          callback(new Error(this.$t('loginView.validation.validBirthDate')))
         } else if(100 > age  > 12 ) {
-          callback(new Error(this.$t('registerForm.validate.minimunAge')))
+          callback(new Error(this.$t('loginView.validation.minimunAge')))
         }else {
           callback()
         }

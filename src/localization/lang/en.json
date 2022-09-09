@@ -38,14 +38,31 @@
   },
   "commonButtons": {
     "goBack": "Go back",
-    "logIn": "Log in"
+    "logIn": "Log in",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Remove"
+  },
+  "commonText": {
+    "yes": "Yes",
+    "no": "No"
   },
   "loginView": {
     "registerSugestion": "Don't have an account yet?",
     "signUp": "Register",
     "loginFormTitle":"Log in",
     "registerFormTitle":"Register",
-    "recoverFormTitle":"Recover account"
+    "recoverFormTitle":"Recover account",
+    "validation":{
+      "email": "Please enter a valid email",
+      "noPassword": "Please input password",
+      "password": "Password should at least have 8 characters",
+      "controlPassword": "Passwords are not the same",
+      "noControlPassword": "Please input a valid password",
+      "validBirthDate":"Please insert your birthDate",
+      "minimunAge":"The minimun age is 12 Y.O."
+    }
   },
   "loginCommon": {
     "email": "Email",
@@ -66,19 +83,79 @@
     "surname": "Introduce your surname",
     "birthDate": "Select your birth date",
     "submitRegister": "Register",
-    "existentAccount": "I already have an account",
-    "validation":{
-      "email": "Por favor ingrese un correo electrónico valido",
-      "noPassword": "Por favor ingrese una contraseña",
-      "password": "La contraseña debe tener al menos 8 caracteres",
-      "controlPassword": "Las contraseñas no coinciden",
-      "noControlPassword": "Por favor ingrese una contraseña valida",
-      "validBirthDate":"Por favor ingrese su fecha de nacimiento",
-      "minimunAge":"La edad mínima es 12 años"
-    }
+    "existentAccount": "I already have an account"
   },
   "dashboardView": {
+    "title": "Dashboard",
     "noWallets": "You haven't registered any wallets or cryptocurrencies in your account. Please connect one or add cryptocurrencies manually to start working.",
-    "profile": "Profile"
+    "profile": "Profile",
+    "noWalletRegister": "There is no information available for the wallen on this date",
+    "globalGraph": {
+      "totalValue": "Total value:",
+      "searchDates": "Search",
+      "resetDates": "Reset"
+    },
+    "compositionTable": {
+      "marketPrice": "Market value ($)",
+      "cryptoValue": "Value ($)",
+      "cryptoAmount": "Amount"
+    }
+  },
+  "profileView": {
+    "title":"%{variable}'s profile",
+    "unknownUser":"User",
+    "userManagement": {
+      "userDataTitle": "User information",
+      "connectedWallets": "Connected wallets",
+      "additionalCryptos": "Additional Cryptos",
+      "userData": {
+        "email": "Email",
+        "name": "Name",
+        "surname": "Surname",
+        "birthDate": "Birthdate",
+        "activeAccounts": "Active accounts",
+        "trackingEnabled": "Tracking enabled"
+      },
+      "staticCrypto": {
+        "add": "Add crypto",
+        "edit": "Edit crypto",
+        "tableHeaders":{
+          "crypto": "Crypto",
+          "amount": "Amount",
+          "averagePrice": "Average price",
+          "dateAdded": "Date added",
+          "actions": "Actions"
+        },
+        "confirmDelete": "Are you sure you want to remove this crypto?",
+        "selectCrypto": "Select crypto tag",
+        "successAdd": "Cryptocurrency successfully added, the value will be calculated in next market control",
+        "successDelete": "Cryptocurrency has been successfully removed from wallet",
+        "successEdit": "Information successfully updated",
+        "failedEdit": "Information could not be updated"
+
+      },
+      "apiKeyManager": {
+        "add": "Add account",
+        "enable": "Enable",
+        "enabled": "enabled",
+        "enableSuccess": "The wallet has been successfully enabled",
+        "disable": "Disable",
+        "disabled": "disabled",
+        "disableSuccess": "The wallet has been successfully disabled",
+        "statusFailure": "Account could not be correctly ${variable}",
+        "confirmDelete": "Are you sure you want to remove the wallet?",
+        "deleteSuccess": "The wallet has been successfully removed",
+        "addDialog": {
+          "name": "Name",
+          "account": "Account",
+          "successMessage": "The wallet has been successfully added. The value will be calculated in the next market control"
+        }
+      }
+    }
+  },
+  "userStatistics": {
+    "wallets": "Wallets",
+    "totalValue": "Total value",
+    "percentage": "Top holding"
   }
 }

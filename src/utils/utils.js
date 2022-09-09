@@ -1,4 +1,7 @@
 import { ElNotification } from 'element-plus';
+import i18n from '../localization'
+
+const { t } = i18n.global
 
 function validateEmail(rule, value, callback) {
   const valid = value.toLowerCase()
@@ -6,7 +9,7 @@ function validateEmail(rule, value, callback) {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
   if (value === '' || !valid) {
-    callback(new Error('Por favor ingrese un correo valida'))
+    callback(new Error(t('loginView.validation.email')))
   }else {
     callback()
   }
@@ -14,7 +17,7 @@ function validateEmail(rule, value, callback) {
 
 async function submitForm(formEl, callback,timeout) {
 	if (!formEl) return
-	await formEl.validate(async (valid, fields) => {	
+	await formEl.validate(async (valid) => {	
 		if (valid) {
       try {
         await callback();

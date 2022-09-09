@@ -38,14 +38,31 @@
   },
   "commonButtons": {
     "goBack": "Volver atras",
-    "logIn": "Iniciar sesion"
+    "logIn": "Iniciar sesion",
+    "edit": "Edit",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "delete": "Eliminar"
+  },
+  "commonText": {
+    "yes": "Si",
+    "no": "No"
   },
   "loginView": {
     "registerSugestion": "¿No tienes cuenta?",
     "signUp": "Registrarse",
     "loginFormTitle":"Iniciar sesión",
     "registerFormTitle":"Registrarse",
-    "recoverFormTitle":"Recuperar contraseña"
+    "recoverFormTitle":"Recuperar contraseña",
+    "validation":{
+      "email": "Por favor ingrese un correo electrónico valido",
+      "noPassword": "Por favor ingrese una contraseña",
+      "password": "La contraseña debe tener al menos 8 caracteres",
+      "controlPassword": "Las contraseñas no coinciden",
+      "noControlPassword": "Por favor ingrese una contraseña valida",
+      "validBirthDate":"Por favor ingrese su fecha de nacimiento",
+      "minimunAge":"La edad mínima es 12 años"
+    }
   },
   "loginCommon": {
     "email": "Correo electrónico",
@@ -66,19 +83,78 @@
     "surname": "Introduzca su apellido",
     "birthDate": "Seleccione la fecha de nacimiento",
     "submitRegister": "Registrarme",
-    "existentAccount": "¿Ya tienes cuenta?",
-    "validation":{
-      "email": "Please enter a valid email",
-      "noPassword": "Please input password",
-      "password": "Password should at least have 8 characters",
-      "controlPassword": "Passwords are not the same",
-      "noControlPassword": "Please input a valid password",
-      "validBirthDate":"Please insert your birthDate",
-      "minimunAge":"The minimun age is 12 Y.O."
-    }
+    "existentAccount": "¿Ya tienes cuenta?"
   },
   "dashboardView": {
+    "title": "Dashboard",
     "noWallets": "No se han encontrado registros del usuario, por favor asegurate de haber conectado las cuentas a seguir o agregar manualmente tus cryptos.",
-    "profile": "Perfil"
+    "profile": "Perfil",
+    "noWalletRegister": "No se ha recopilado informacion de la cartera en dicha fecha",
+    "globalGraph": {
+      "totalValue": "Total value:",
+      "searchDates": "Buscar",
+      "resetDates": "Resetear"
+    },
+    "compositionTable": {
+      "marketPrice": "Precio de mercado ($)",
+      "cryptoValue": "Valor ($)",
+      "cryptoAmount": "Cantidad"
+    }
+  },
+  "profileView": {
+    "title":"Perfil de %{variable}",
+    "unknownUser":"Usuario",
+    "userManagement": {
+      "userDataTitle": "Información de usuario",
+      "connectedWallets": "Cuentas enlazadas",
+      "additionalCryptos": "Cryptos adicionales",
+      "userData": {
+        "email": "Correo",
+        "name": "Nombre",
+        "surname": "Apellido",
+        "birthDate": "Fecha de nacimiento",
+        "activeAccounts": "Cuentas activas",
+        "trackingEnabled": "Seguimiento activado"
+      },
+      "staticCrypto": {
+        "add": "Agregar crypto",
+        "edit": "Editar crypto",
+        "tableHeaders":{
+          "crypto": "Crypto",
+          "amount": "Cantidad",
+          "averagePrice": "Precio promedio",
+          "dateAdded": "Fecha de adición",
+          "actions": "Operaciones"
+        },
+        "confirmDelete": "¿Estás seguro que deseas eliminar esta crypto?",
+        "selectCrypto": "Seleccione el tag de la crypto",
+        "successAdd": "Se ha agregado la cryptomoneda correctamente, se añadirá en el proximo calculo de valor",
+        "successDelete": "Se ha eliminado la cryptomoneda de la billetera estatica",
+        "successEdit": "Se ha actualizado la informacion ",
+        "failedEdit": "No se ha podido actualizar la informacion de la cryptomoneda"
+      },
+      "apiKeyManager": {
+        "add": "Agregar cuenta",
+        "enable": "Activar",
+        "enableSuccess": "La cuenta se ha vinculado de forma satisfactoria",
+        "disable": "Desactivar",
+        "disableSuccess": "La cuenta se ha desvinculado de forma satisfactoria",
+        "statusFailure": "La cuenta no ha podido ser ${variable} correctamente",
+        "enabled": "activada",
+        "disabled": "desactivada",
+        "confirmDelete": "¿Estás seguro que deseas eliminar la cartera?",
+        "deleteSuccess": "La cuenta se ha removido de forma satisfactoria",
+        "addDialog": {
+          "name": "Nombre Identificador",
+          "account": "Cuenta",
+          "successMessage": "La cuenta se ha agregado correctamente. Se calculará el valor de la billetera en el proximo control"
+        }
+      }
+    }
+  },
+  "userStatistics": {
+    "wallet": "Billeteras",
+    "totalValue": "Valor global",
+    "percentage": "Mayor %"
   }
 }
