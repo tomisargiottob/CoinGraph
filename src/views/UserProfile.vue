@@ -2,7 +2,7 @@
 <template>
   <div>
     <el-row justify="center">
-      <h1>Perfil de {{user.firstName || 'Anonymous'}}</h1>
+      <h1>{{$t('profileView.title', { variable: user.firstName || $t('profileView.unknownUser') })}}</h1>
     </el-row>
     <el-row>
       <el-col :span="22" :offset="1">
@@ -12,13 +12,13 @@
     <el-row class="user-management">
       <el-col :span="22" :offset="1" class="user-management-items">
         <el-collapse v-model="activeNames">
-          <el-collapse-item title="Información de usuario" name="1">
+          <el-collapse-item :title="$t('profileView.userManagement.userDataTitle')" name="1">
             <user-data :user="user" :apiKeys="apiKeys"></user-data>
           </el-collapse-item>
-          <el-collapse-item title="Cuentas enlazadas" name="2">
+          <el-collapse-item :title="$t('profileView.userManagement.connectedWallets')" name="2">
             <keys-manager :apiKeys="apiKeys"></keys-manager>
           </el-collapse-item>
-          <el-collapse-item title="Cryptos adicionales" name="3">
+          <el-collapse-item :title="$t('profileView.userManagement.additionalCryptos')" name="3">
             <static-cryptos :staticCryptos="staticCryptos" ></static-cryptos>
           </el-collapse-item>
         </el-collapse>  

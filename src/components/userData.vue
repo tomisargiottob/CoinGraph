@@ -7,15 +7,15 @@
       size="large"
       border
     >
-      <el-descriptions-item label="Email">{{user.username}}</el-descriptions-item>
-      <el-descriptions-item label="Nombre">{{user.firstName}}</el-descriptions-item>
-      <el-descriptions-item label="Apellido">{{user.surname}}</el-descriptions-item>
-      <el-descriptions-item label="Fecha de nacimiento" :span="2">{{new Date(user.birthDate).toLocaleDateString("es-ES")}}</el-descriptions-item>
+      <el-descriptions-item :label="$t('profileView.userManagement.userData.email')">{{user.username}}</el-descriptions-item>
+      <el-descriptions-item :label="$t('profileView.userManagement.userData.name')">{{user.firstName}}</el-descriptions-item>
+      <el-descriptions-item :label="$t('profileView.userManagement.userData.surname')">{{user.surname}}</el-descriptions-item>
+      <el-descriptions-item :label="$t('profileView.userManagement.userData.birthDate')" :span="2">{{new Date(user.birthDate).toLocaleDateString("es-ES")}}</el-descriptions-item>
       <el-descriptions-item label="Cuentas activas">
         <el-tag v-for="apiKey in apiKeys" :key="apiKey.id" size="small">{{apiKey.account}}</el-tag>
       </el-descriptions-item>
-      <el-descriptions-item label="Seguimiento activado"
-        >{{user.active ? 'Si': 'No'}}
+      <el-descriptions-item :label="$t('profileView.userManagement.userData.trackingEnabled')"
+        >{{user.active ? $t('commonText.yes'): $t('commonText.no')}}
       </el-descriptions-item>
     </el-descriptions>
     </el-col>

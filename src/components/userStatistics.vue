@@ -4,12 +4,12 @@
       <el-col :span="6">
         <el-row class="counter">
           {{apiKeys.length}}</el-row>
-        <el-row class="counter-description"> Billeteras&nbsp;<span class="hide-mobile">añadidas</span></el-row>
+        <el-row class="counter-description"> {{$t('userStatistics.wallets')}} </el-row>
       </el-col>
       <el-col :span="6">
         <el-row class="counter">
           {{walletValue}} $</el-row>
-        <el-row class="counter-description"> Valor&nbsp;<span class="hide-mobile">de cartera</span></el-row>
+        <el-row class="counter-description"> {{$t('userStatistics.totalValue')}}</el-row>
       </el-col>
       <el-col :span="6">
         <el-row class="counter">
@@ -19,7 +19,7 @@
       <el-col :span="6">
         <el-row class="counter">
           {{cryptoWeight}}</el-row>
-        <el-row class="counter-description"> Mayor&nbsp;<span class="show-mobile">%</span><span class="hide-mobile">porcentaje</span> </el-row>
+        <el-row class="counter-description"> {{$t('userStatistics.percentage')}} </el-row>
       </el-col>
     </el-row>
   </div>
@@ -50,7 +50,7 @@
     padding: 10px 20px;
     .counter{
       place-content: center;
-      font-size:x-large;
+      font-size: 1rem;
       font-weight: 700;
     }
     .counter-description{

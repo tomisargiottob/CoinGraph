@@ -4,14 +4,14 @@
     <el-row>
       <el-col :span="4" :offset="18" @click="dialogFormVisible = true">
         <el-button type="primary">
-          Agregar cuenta
+          {{$t('profileView.userManagement.apiKeyManager.add')}}
         </el-button>
       </el-col>
     </el-row>
     <el-row justify="center" class="key-manager">
       <el-col :span="16">
         <el-table :data="apiKeys">
-          <el-table-column prop="name" label="Nombre identificador" width="250" />
+          <el-table-column prop="name" :label="$t('profileView.userManagement.apiKeyManager.addDialog.name')" width="250" />
           <el-table-column prop="account" label="Cuenta Asociada" width="150" />
           <el-table-column prop="status" label="Estado" width="150" />
           <el-table-column label="Operaciones" width="250">
@@ -19,10 +19,10 @@
               <el-row >
                 <el-col :span="12">
                   <el-button link type="primary" size="small" v-if="apiKeys[scope.$index].status === 'inactive'" @click="editAccount(apiKeys[scope.$index].id, 'active')"
-                    >Activar</el-button
+                    >{{$t('profileView.userManagement.apiKeyManager.enable')}}</el-button
                   >
                   <el-button link type="primary" size="small" v-if="apiKeys[scope.$index].status === 'active'" @click="editAccount(apiKeys[scope.$index].id, 'inactive')"
-                    >Desactivar</el-button
+                    >{{$t('profileView.userManagement.apiKeyManager.disable')}}</el-button
                   >
                 </el-col>
                 <el-col :span="12">
@@ -30,12 +30,12 @@
                   confirm-button-text="Si"
                   cancel-button-text="No"
                   icon-color="#626AEF"
-                  title="Estas seguro que deseas eliminar esta cuenta?"
+                  :title="$t('profileView.userManagement.apiKeyManager.confirmDelete')"
                   @confirm="removeAccount(scope.$index)"
                 >
                   <template #reference>
                     <el-button link type="danger" size="small"
-                      >Eliminar</el-button
+                      >{{$t('commonButtons.delete')}}</el-button
                     >
                   </template>
                 </el-popconfirm>
@@ -48,10 +48,10 @@
     </el-row>
     <el-dialog v-model="dialogFormVisible" title="Agregar Cuenta">
       <el-form :model="form">
-       <el-form-item label="Nombre Identificador" :label-width="formLabelWidth">
+       <el-form-item :label="$t('profileView.userManagement.apiKeyManager.addDialog.name')" :label-width="formLabelWidth">
           <el-input v-model="form.name" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="Account" :label-width="formLabelWidth">
+        <el-form-item :label="$t('profileView.userManagement.apiKeyManager.addDialog.account')" :label-width="formLabelWidth">
           <el-select v-model="form.account" required placeholder="Seleccione el tipo de cuenta">
             <el-option label="Binance" value="binance" />
             <el-option label="Kucoin" value="kucoin" />
@@ -71,11 +71,11 @@
         <span class="dialog-footer">
           <el-row justify="center">
             <el-col :span="4">
-              <el-button @click="dialogFormVisible = false">Cancelar</el-button>
+              <el-button @click="dialogFormVisible = false">{{$t('commonButtons.cancel')}}</el-button>
             </el-col>
             <el-col :offset="1" :span="4">
               <el-button type="primary" @click="addAccount"
-                >Confirmar</el-button
+                >{{$t('commonButtons.confirm')}}</el-button
               >
             </el-col>
           </el-row>
@@ -112,7 +112,7 @@
         try {
           await this.addApiKey(this.form)
           ElMessage({
-            message: 'La cuenta se ha agregado correctamente. Se calculará el valor de la billetera en el proximo control',
+            message: this.$t('profileView.userManagement.apiKeyManager.addDialog.successMessage'),
             type: 'success',
           })
         } catch (err) {
@@ -129,7 +129,7 @@
       async removeAccount(idx) {
         await this.removeApiKey(this.apiKeys[idx].id);
         ElMessage({
-          message: 'La cuenta se ha desvinculado de forma satisfactoria',
+          message: this.$t('profileView.userManagement.apiKeyManager.deleteSuccess'),
           type: 'success',
         })
       },
@@ -138,20 +138,20 @@
           if (status === 'active') {
             await this.enableApiKey(id, status);
             ElMessage({
-              message: `La cuenta se ha activado satisfactoriamente`,
+              message: this.$t('profileView.userManagement.apiKeyManager.enableSuccess'),
               type: 'success',
             })
           } else {
             await this.disableApiKey(id, status);
             ElMessage({
-              message: `La cuenta se ha desactivado satisfactoriamente`,
+              message: this.$t('profileView.userManagement.apiKeyManager.disableSuccess'),
               type: 'success',
             })
           }
         } catch(err) {
           ElMessage({
-            message: `La cuenta no ha podido ser ${status === 'active' ? 'activada' : 'desactivada'} correctamente`,
-            type: 'success',
+            message: this.$t('profileView.userManagement.apiKeyManager.disableSuccess', { variable: status === 'active' ? this.$t('profileView.userManagement.apiKeyManager.enabled') : this.$t('profileView.userManagement.apiKeyManager.disabled')}),
+            type: 'warning',
           })
         }
       },

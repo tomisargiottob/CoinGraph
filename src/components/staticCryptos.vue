@@ -3,23 +3,23 @@
    <el-row>
       <el-col :span="4" :offset="18" @click="showDialogForm()">
         <el-button type="primary">
-          Agregar crypto
+          {{$t('profileView.userManagement.staticCrypto.add')}}
         </el-button>
       </el-col>
     </el-row>
     <el-row class="static-cryptos">
       <el-col :span="16" :offset="4">
         <el-table table-layout="auto" :data="staticCryptos" style="width: 100%">
-          <el-table-column fixed prop="asset" label="Crypto" />
-          <el-table-column prop="amount" label="Cantidad" />
-          <el-table-column prop="averagePrice" label="Precio primedio de compra"/>
-          <el-table-column prop="formatedDate" label="Fecha de adición"/>
-          <el-table-column label="Operaciones">
+          <el-table-column fixed prop="asset" :label="$t('profileView.userManagement.staticCrypto.tableHeaders.crypto')" />
+          <el-table-column prop="amount" :label="$t('profileView.userManagement.staticCrypto.tableHeaders.amount')" />
+          <el-table-column prop="averagePrice" :label="$t('profileView.userManagement.staticCrypto.tableHeaders.averagePrice')"/>
+          <el-table-column prop="formatedDate" :label="$t('profileView.userManagement.staticCrypto.tableHeaders.dateAdded')"/>
+          <el-table-column :label="$t('profileView.userManagement.staticCrypto.tableHeaders.actions')">
             <template #default="scope">
               <el-row >
                 <el-col :span="12">
                   <el-button link type="primary" size="small" @click="showDialogForm(scope.$index)">
-                    Editar
+                    {{$t('commonButtons.edit')}}
                   </el-button>
                 </el-col>
                 <el-col :span="12">
@@ -27,12 +27,12 @@
                   confirm-button-text="Si"
                   cancel-button-text="No"
                   icon-color="#626AEF"
-                  title="Estas seguro que deseas eliminar esta crypto?"
+                  :title="$t('profileView.userManagement.staticCrypto.confirmDelete')"
                   @confirm="removeCrypto(scope.$index)"
                 >
                   <template #reference>
                     <el-button link type="danger" size="small"
-                      >Eliminar</el-button
+                      >{{$t('commonButtons.delete')}}</el-button
                     >
                   </template>
                 </el-popconfirm>
@@ -46,7 +46,7 @@
     <el-dialog v-model="dialogFormVisible" :title="form.title">
       <el-form :model="form">
         <el-form-item label="Crypto" :label-width="formLabelWidth">
-          <el-select v-model="form.asset" :disabled="form.edit" :remote="!form.edit" :remote-method="searchCryptos" :loading="loading" filterable placeholder="Please select a zone">
+          <el-select v-model="form.asset" :disabled="form.edit" :remote="!form.edit" :remote-method="searchCryptos" :loading="loading" filterable :placeholder="$t('profileView.userManagement.staticCrypto.selectCrypto')">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -55,10 +55,10 @@
             />
           </el-select>
         </el-form-item>
-       <el-form-item label="Cantidad" :label-width="formLabelWidth">
+       <el-form-item :label="$t('profileView.userManagement.staticCrypto.tableHeaders.amount')" :label-width="formLabelWidth">
           <el-input v-model="form.amount" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="Precio promedio" :label-width="formLabelWidth">
+        <el-form-item :label="$t('profileView.userManagement.staticCrypto.tableHeaders.averagePrice')" :label-width="formLabelWidth">
           <el-input v-model="form.averagePrice" autocomplete="off" />
         </el-form-item>
       </el-form>
@@ -66,11 +66,11 @@
         <span class="dialog-footer">
           <el-row justify="center">
             <el-col :span="4">
-              <el-button @click="dialogFormVisible = false">Cancelar</el-button>
+              <el-button @click="dialogFormVisible = false">{{$t('commonButtons.cancel')}}</el-button>
             </el-col>
             <el-col :offset="1" :span="4">
               <el-button type="primary" @click="sendForm"
-                >Confirmar</el-button
+                >{{$t('commonButtons.confirm')}}</el-button
               >
             </el-col>
           </el-row>
@@ -121,7 +121,7 @@ export default {
     showDialogForm(idx) {
       if (idx !== undefined) {
         this.form = this.staticCryptos[idx];
-        this.form.title = 'Editar Crypto'
+        this.form.title = this.$t('profileView.userManagement.staticCrypto.edit')
         this.form.edit = true
         this.formCallback = this.editCrypto;
       } else {
@@ -129,7 +129,7 @@ export default {
           asset: '',
           amount: '',
           averagePrice: '',
-          title: 'Agregar Crypto',
+          title: this.$t('profileView.userManagement.staticCrypto.add'),
         }
         this.formCallback = this.addCrypto;
       }
@@ -142,7 +142,7 @@ export default {
       try {
         await this.addStaticCrypto(crypto)
         ElMessage({
-          message: 'Se ha agregado la cryptomoneda correctamente, se añadirá en el proximo calculo de valor',
+          message: this.$t('profileView.userManagement.staticCrypto.successAdd'),
           type: 'success',
         })
         this.form = {};
@@ -158,7 +158,7 @@ export default {
       try {
         await this.removeStaticCrypto(this.staticCryptos[idx].id);
         ElMessage({
-          message: 'Se ha eliminado la cryptomoneda de la billetera estatica',
+          message: this.$t('profileView.userManagement.staticCrypto.successDelete'),
           type: 'success',
         })
       } catch (err) {
@@ -173,12 +173,12 @@ export default {
         await this.editStaticCrypto(crypto);
         this.dialogFormVisible = false;
          ElMessage({
-          message: `Se ha actualizado la informacion `,
+          message: this.$t('profileView.userManagement.staticCrypto.successEdit'),
           type: 'success',
         })
       } catch(err) {
         ElMessage({
-          message: `No se ha podido actualizar la informacion de la cryptomoneda`,
+          message: this.$t('profileView.userManagement.staticCrypto.failedEdit'),
           type: 'error',
         })
       }
